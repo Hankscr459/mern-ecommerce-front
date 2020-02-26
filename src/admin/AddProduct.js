@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Layout from '../core/Layout'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
-import { createProduct } from './apiAdmin'
+import { createProduct, getCategories } from './apiAdmin'
 
 const AddProduct = () => {
 
@@ -17,7 +17,7 @@ const AddProduct = () => {
         photo: '',
         loading: false,
         error: '',
-        createProduct: '',
+        createdProduct: '',
         redirectToProfile: false,
         formData: ''
     });
@@ -28,19 +28,36 @@ const AddProduct = () => {
         description,
         price,
         categories,
-        category,
-        shipping,
+        // category,
+        // shipping,
         quantity,
-        photo,
+        // photo,
         loading,
         error,
-        createProduct,
-        redirectToProfile,
+        createdProduct,
+        // redirectToProfile,
         formData
     } = values;
+    
+    //load categories and set form data
+    const init = () => {
+        getCategories().then(data => {
+            if (data.error) {
+                setValues({ ...values, error: data.error })
+            } else {
+                // console.log(data)
+                setValues({
+                    ...values,
+                    categories: data.data,
+                    formData: new FormData()
+                })
+            }
+        })
+    }
 
+    
     useEffect(() => {
-        setValues({ ...values, formData: new FormData() })
+        init();
     }, [])
 
     // two arrow: it is high order function to function is returning anthor function
@@ -65,7 +82,7 @@ const AddProduct = () => {
                     price: '',
                     quantity: '',
                     loading: false,
-                    createProduct: data.name
+                    createdProduct: data.name
                 })
             }
         })
@@ -117,8 +134,13 @@ const AddProduct = () => {
                     onChange={handleChange('category')}
                     className='form-control'
                 >
-                    <option value='5e51481e039a0c30742b127f'>Node</option>
-                    <option value='5e51481e039a0c30742b127f'>phpp</option>
+                    <option value='0'>Please select</option>
+                    {categories && 
+                        categories.map((c, i) => (
+                            <option key={i} value={c._id}>
+                                {c.name}
+                            </option>
+                        ))}
                 </select>
             </div>
             <div className='form-group'>
@@ -127,6 +149,7 @@ const AddProduct = () => {
                     onChange={handleChange('shipping')}
                     className='form-control'
                 >
+                <option value='2'>Please select</option>
                     <option value='0'>No</option>
                     <option value='1'>Yes</option>
                 </select>
@@ -143,7 +166,33 @@ const AddProduct = () => {
             <button className='btn btn-outline-primary'>Create Product</button>
         </form>
     )
+    
+    const showError = () => (
+        <div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
+            {error}
+        </div>
+    )
 
+    const showSuccess = () => (
+        <div className="alert alert-info" style={{ display: createdProduct ? '' : 'none' }}>
+            <h2>{`${createdProduct}`} is created!</h2>
+        </div>
+    )
+
+    const showLoading = () =>
+        loading && (
+            <div className="alert alert-success">
+                <h2>Loading...</h2>
+            </div>
+        )
+    
+    const goBack = () => (
+        <div className="mt-5">
+            <Link to="/admin/dashboard" className="text-warning">
+                Back to Dashboard
+            </Link>
+        </div>
+    );
     return (
         <Layout
             title='Add a new Product'
@@ -152,7 +201,11 @@ const AddProduct = () => {
         >
             <div className='row'>
                 <div className='col-md-8 offset-md-2'>
+                    {showLoading()}
+                    {showSuccess()}
+                    {showError()}
                     {newPostForm()}
+                    {goBack()}
                 </div>
             </div>
         </Layout>
