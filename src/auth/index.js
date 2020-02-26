@@ -57,6 +57,7 @@ export const signout = (next) => {
     }
 }
 
+// isAuthenticated() will read the user data saved in localstorage.
 export const isAuthenticated = () => {
     if (typeof window == 'undefined') {
         return false
