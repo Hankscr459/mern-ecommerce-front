@@ -42,18 +42,18 @@ const AddProduct = () => {
     //load categories and set form data
     const init = () => {
         getCategories().then(data => {
-            if (data.error) {
-                setValues({ ...values, error: data.error })
-            } else {
-                // console.log(data)
-                setValues({
-                    ...values,
-                    categories: data.data,
-                    formData: new FormData()
-                })
-            }
-        })
-    }
+          if (data.error) {
+            setValues(prev => ({ ...prev, error: data.error }));
+          } else {
+            // console.log(data)
+            setValues(prev => ({
+              ...prev,
+              categories: data.data,
+              formData: new FormData()
+            }));
+          }
+        });
+      };
 
     
     useEffect(() => {
