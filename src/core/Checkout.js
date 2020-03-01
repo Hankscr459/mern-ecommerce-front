@@ -7,6 +7,7 @@ import {
     getBraintreeClientToken,
     processPayment
 } from './apiCore'
+import { emptyCart } from './cartHelpers'
 import DropIn from 'braintree-web-drop-in-react'
 // import Card from './Card'
 
@@ -28,7 +29,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                 console.log(data.error)
                 setData({ ...data, error: data.error })
             } else {
-                console.log(data); // make sure you get data
+                // console.log(data); // make sure you get data
                 setData({ clientToken: data.clientToken })
             }
         })
@@ -61,7 +62,10 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                 <div>
                     <DropIn 
                         options={{
-                            authorization: data.clientToken
+                            authorization: data.clientToken,
+                            paypal: {
+                                flow: 'vault'
+                            }
                         }}
                         onInstance={instance => (data.instance = instance)}
                      />
@@ -97,6 +101,10 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                     // console.log(response)
                     setData({ success: response.success })
                     // empty
+                    emptyCart(() => {
+                        setRun(!run)
+                        console.log('payment succcess and empty cart')
+                    })
                     // create order
                 })
                 .catch(error => console.log(error))
