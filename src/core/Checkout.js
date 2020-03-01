@@ -3,9 +3,9 @@ import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 // import Layout from './Layout'
 import {
-    getProduct,
     getBraintreeClientToken,
-    processPayment
+    processPayment,
+    createOrder
 } from './apiCore'
 import { emptyCart } from './cartHelpers'
 import DropIn from 'braintree-web-drop-in-react'
@@ -13,6 +13,7 @@ import DropIn from 'braintree-web-drop-in-react'
 
 const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     const [data, setData] = useState({
+        loading: false,
         success: false,
         clientToken: null,
         error: '',
@@ -38,6 +39,10 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         getToken(userId, token)
     }, [])
 
+    const handleAddress = event => {
+        setData({ ...data, address: event.target.value })
+    }
+
     const getTotal = () => {
         return products.reduce((currentValue, nextValue) =>{
             return currentValue + nextValue.count * nextValue.price
@@ -60,6 +65,15 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         <div onBlur={() => setData({...data, error: ''})}>
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
+                    <div className="gorm-group mb-3">
+                        <label className="text-muted">Delivery address:</label>
+                        <textarea
+                            onChange={handleAddress}
+                            className="form-control"
+                            value={data.address}
+                            placeholder="Type your delivery address here..."
+                        />
+                    </div>
                     <DropIn 
                         options={{
                             authorization: data.clientToken,
@@ -78,6 +92,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     )
 
     const buy = () => {
+        setData({ loading: true })
         // send the nonce to your server
         // nonce = data.instance.requestPaymentMethod()
         let nonce
@@ -98,16 +113,32 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
             }
             processPayment(userId, token, paymentData)
                 .then(response => {
-                    // console.log(response)
+                    console.log(response)
+
+                    const createOrderData = {
+                        products: products,
+                        transaction_id: response.transaction.id,
+                        amount: response.transaction.amount,
+                        address: data.address
+                    }
+                    createOrder(userId, token, createOrderData)
+
                     setData({ success: response.success })
                     // empty
                     emptyCart(() => {
                         setRun(!run)
                         console.log('payment succcess and empty cart')
+                        setData({
+                            loading: false,
+                            success: true
+                        })
                     })
                     // create order
                 })
-                .catch(error => console.log(error))
+                .catch(error => {
+                    console.log(error)
+                    setData({ loading: false })
+                })
         })
         .catch(error => {
             // console.log('dropin error: ', error)
@@ -133,9 +164,12 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         </div>
     )
 
+    const showLoading = loading => loading && <h2>Loading...</h2>
+
     return (
         <div>
             <h2>Total: ${getTotal()}</h2>
+            {showLoading(data.loading)}
             {showSuccess(data.success)}
             {showError(data.error)}
             {showCheCkout()}
