@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
+import { API } from '../config'
 import { Link, Redirect } from 'react-router-dom'
 import ShowImage from './ShowImage'
 import moment from 'moment'
 import { addItem, updateItem, removeItem } from './cartHelpers'
 
-const Card = ({
+const ProductDetail = ({
     product,
-    showViewProductButton = true,
     showAddToCartButton= true,
     cartUpdate = false,
     showRemoveProductButton = false,
@@ -17,18 +17,6 @@ const Card = ({
 }) => {
     const [redirect, setRedirect] = useState(false)
     const [count, setCount] = useState(product.count)
-
-    const showViewButton = (showViewProductButton) => {
-        return (
-            showViewProductButton && (
-                <Link to={`/product/${product._id}`} className='mr-2'>
-                    <button className='btn btn-outline-primary mt-2 mb-2 mr-2'>
-                        View Product
-                    </button>
-                </Link>
-            )
-        )
-    }
 
     const addToCart = () => {
         addItem(product, () => {
@@ -73,7 +61,7 @@ const Card = ({
 
     const showStuck = (quantity) => {
         return quantity > 0 ? (
-            <span className='badge badge-primary badge-pill'>In Stuck</span>
+            <span className='badge badge-primary badge-pill'>In Stuck {product.quantity}</span>
         ) : (
             <span className='badge badge-primary badge-pill'>Out of Stuck</span>
         )
@@ -107,9 +95,16 @@ const Card = ({
             <div className='card-header name'>{product.name}</div>
             <div className='card-body'>
             {shouldRedirect(redirect)}
-            <ShowImage item={product} url='product' />
+            <div className='product-img'>
+                <img
+                    src={`${API}/product/photo/${product._id}`}
+                    alt={product.name}
+                    className='mb-3'
+                    style={{ maxHeight: '100%', maxWidth:'100%' }}
+                />
+            </div>
                 <p className='lead mt-2'>
-                    {product.description.substring(0, 100)}
+                    {product.description}
                 </p>
                 <p className='black-10'>
                     ${product.price}
@@ -122,7 +117,6 @@ const Card = ({
                 </p>
                     {showStuck(product.quantity)}
                     <br />
-                    {showViewButton(showViewProductButton)}
                     {showAddToCart(showAddToCartButton)}
                     {showRemoveBotton(showRemoveProductButton)}
                     {showCartUpdateOptions(cartUpdate)}
@@ -131,4 +125,4 @@ const Card = ({
     )
 }
 
-export default Card;
+export default ProductDetail;
