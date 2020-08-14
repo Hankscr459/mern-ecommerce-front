@@ -100,8 +100,8 @@ const Shop = () => {
             description='Searcch and find books of your choice'
             className='container-fluid'
         >
-            <div className='row'>
-                <div className='col-sm-10 col-md-3'>
+            <div className='row justify-content-center'>
+                <div className='col-sm-10 col-md-3 col-lg-3'>
                     <h4>Filter by category</h4>
                     <ul>
                         <Checkbox 
@@ -127,7 +127,7 @@ const Shop = () => {
                     <h2 className='mb-4'>Products</h2>
                     <div className='row'>
                         {filteredResults.map((product, i) => (
-                            <div key={i} className='col-sm-12 col-md-4 mb-3'>
+                            <div key={i} className='col-sm-12 col-md-5 col-lg-4 col-xl-3 mb-3'>
                                 <Card product={product} />
                             </div>
                         ))}

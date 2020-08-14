@@ -73,14 +73,9 @@ const Product = (props) => {
                 </li>
             </ul>
         <hr className='mt-4 mb-4' />
-        <div className='row'>
-            <div className='col-8'>
                 {product && product.description && (
                     <ProductDetail product={product}  />
                 )}
-            </div>
-            
-        </div>
         <hr className='mt-5 mb-5' />
         <h4 className='mt-5 mb-3'>Related product</h4>
             <div className='row justify-content-center'>

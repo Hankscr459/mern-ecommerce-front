@@ -53,10 +53,15 @@
     background: #b3b3b3;
 }
 
+.card {
+    overflow: hidden;
+}
 
 .product-img {
-    min-height: 100px;
+    height: 200px;
+    min-Width: 100px;
 }
+
 
 /** 
 *  jumbotron anination

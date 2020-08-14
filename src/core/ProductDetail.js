@@ -61,9 +61,9 @@ const ProductDetail = ({
 
     const showStuck = (quantity) => {
         return quantity > 0 ? (
-            <span className='badge badge-primary badge-pill'>In Stuck {product.quantity}</span>
+            <h3 className='text-primary'>In Stuck {product.quantity}</h3>
         ) : (
-            <span className='badge badge-primary badge-pill'>Out of Stuck</span>
+            <h3 className='text-warning'>Out of Stuck</h3>
         )
     }
 
@@ -91,35 +91,43 @@ const ProductDetail = ({
     }
 
     return (
-        <div className='card' style={{ maxWidth:'350px' }}>
-            <div className='card-header name'>{product.name}</div>
-            <div className='card-body'>
-            {shouldRedirect(redirect)}
-            <div className='product-img'>
-                <img
-                    src={`${API}/product/photo/${product._id}`}
-                    alt={product.name}
-                    className='mb-3'
-                    style={{ maxHeight: '100%', maxWidth:'100%' }}
-                />
+        <div className=''>
+            <div className='row'>
+                <h2 className='pb-5 ml-3'>{product.name}</h2>
             </div>
-                <p className='lead mt-2'>
-                    {product.description}
-                </p>
-                <p className='black-10'>
-                    ${product.price}
-                </p>
-                <p className='black-9'>
-                    Category: {product.category && product.category.name}
-                </p>
-                <p className='black-8'>
+            {shouldRedirect(redirect)}
+            <div className='row justify-content-center'>
+                <div className='col-xl-1 col-lg-1 col-md-0 col-sm-0'></div>
+                <div className='col-xl-8 col-lg-8 col-md-9 col-sm-10'>
+                    <img
+                        src={`${API}/product/photo/${product._id}`}
+                        alt={product.name}
+                        className='mb-3'
+                        style={{ maxHeight: 'auto', maxWidth:'250px' }}
+                    />
+                    <p className=''>
+                        Category: {product.category && product.category.name}
+                    </p>
+                    <p className='lead mt-2'>
+                        {product.description}
+                    </p>
+                </div>
+                <div className='col-xl-2 col-lg-2 col-md-3 col-sm-10'>
+                    <h3 className=''>
+                        ${product.price}
+                    </h3>
+                    
+                        {showStuck(product.quantity)}
+                        <br />
+                        {showAddToCart(showAddToCartButton)}
+                        {showRemoveBotton(showRemoveProductButton)}
+                        {showCartUpdateOptions(cartUpdate)}
+                </div>
+            </div>
+            <div className='row justify-content-end'>
+                <p className='mr-4'>
                     Added on {moment(product.createdAt).fromNow()}
                 </p>
-                    {showStuck(product.quantity)}
-                    <br />
-                    {showAddToCart(showAddToCartButton)}
-                    {showRemoveBotton(showRemoveProductButton)}
-                    {showCartUpdateOptions(cartUpdate)}
             </div>
         </div>
     )

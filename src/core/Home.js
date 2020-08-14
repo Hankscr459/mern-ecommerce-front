@@ -44,15 +44,16 @@ const Home = () => {
             <h2 className='mb-4'>Best Sellers</h2>
             <div className='row justify-content-center'>
                 {productsBySell.map((product, i) => (
-                    <div key={i} className='md-col-4 sm-col-10 mb-3 ml-2'>
+                    <div key={i} className='col-xl-2 col-lg-3 col-md-4 col-sm-10 mb-3 ml-2'>
                         <Card product={product} />
                     </div>
                 ))}
             </div>
+            
             <h2 className='mb-4'>New Arrivals</h2>
             <div className='row justify-content-center'>
                 {productsByArrival.map((product, i) => (
-                    <div key={i} className='md-col-4 sm-col-10 mb-3 ml-2'>
+                    <div key={i} className='col-xl-2 col-lg-3 col-md-4 col-sm-10 mb-3 ml-1'>
                         <Card product={product} />
                     </div>
                 ))}

@@ -6,7 +6,6 @@ import { addItem, updateItem, removeItem } from './cartHelpers'
 
 const Card = ({
     product,
-    showViewProductButton = true,
     showAddToCartButton= true,
     cartUpdate = false,
     showRemoveProductButton = false,
@@ -21,8 +20,8 @@ const Card = ({
     const showViewButton = (showViewProductButton) => {
         return (
             showViewProductButton && (
-                <Link to={`/product/${product._id}`} className='mr-2'>
-                    <button className='btn btn-outline-primary mt-2 mb-2 mr-2'>
+                <Link to={`/product/${product._id}`} className='mr-1'>
+                    <button className='btn btn-outline-primary mb-1 mr-2'>
                         View Product
                     </button>
                 </Link>
@@ -47,7 +46,7 @@ const Card = ({
             showAddToCartButton && (
                 <button
                     onClick={ addToCart }
-                    className='btn btn-outline-warning mt-2 mb-2'
+                    className='btn btn-outline-warning mt-0 mb-1'
                 >
                     Add to cart
                 </button>
@@ -73,9 +72,9 @@ const Card = ({
 
     const showStuck = (quantity) => {
         return quantity > 0 ? (
-            <span className='badge badge-primary badge-pill'>In Stuck</span>
+            <h6 className='text-primary mr-3 mt-2'>In Stuck {quantity}</h6>
         ) : (
-            <span className='badge badge-primary badge-pill'>Out of Stuck</span>
+            <p className='text-danger mr-3 mt-2'>Out of Stuck</p>
         )
     }
 
@@ -103,26 +102,25 @@ const Card = ({
     }
 
     return (
-        <div className='card' style={{ maxWidth:'350px' }}>
-            <div className='card-header name'>{product.name}</div>
+        <div className='card' style={{ maxWidth:'250px' }}>
+            
             <div className='card-body'>
             {shouldRedirect(redirect)}
-            <ShowImage item={product} url='product' />
-                <p className='lead mt-2'>
-                    {product.description.substring(0, 100)}
+            <Link to={`/product/${product._id}`} className='mr-1 '>
+                <ShowImage item={product} url='product' />
+                <div className='name pt-1 pb-1 pl-1'>{product.name.substring(0, 20)}</div>
+            </Link>
+                
+                <p className='badge badge-primary badge-pill'>
+                    {product.category && product.category.name}
                 </p>
-                <p className='black-10'>
-                    ${product.price}
-                </p>
-                <p className='black-9'>
-                    Category: {product.category && product.category.name}
-                </p>
-                <p className='black-8'>
-                    Added on {moment(product.createdAt).fromNow()}
-                </p>
-                    {showStuck(product.quantity)}
+                <div className='row justify-content-between'>
+                    <h4 className='pb-0 mb-0 ml-3'>
+                        ${product.price}
+                    </h4>
+                        {showStuck(product.quantity)}
+                </div>
                     <br />
-                    {showViewButton(showViewProductButton)}
                     {showAddToCart(showAddToCartButton)}
                     {showRemoveBotton(showRemoveProductButton)}
                     {showCartUpdateOptions(cartUpdate)}
