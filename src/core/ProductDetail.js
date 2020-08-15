@@ -118,6 +118,7 @@ const ProductDetail = ({
                     </h3>
                     
                         {showStuck(product.quantity)}
+                        <h3 className='text-info'>Sold {product.sold}</h3>
                         <br />
                         {showAddToCart(showAddToCartButton)}
                         {showRemoveBotton(showRemoveProductButton)}
@@ -127,6 +128,11 @@ const ProductDetail = ({
             <div className='row justify-content-end'>
                 <p className='mr-4'>
                     Added on {moment(product.createdAt).fromNow()}
+                </p>
+            </div>
+            <div className='row justify-content-end'>
+                <p className='mr-4'>
+                    Updated on {moment(product.updatedAt).fromNow()}
                 </p>
             </div>
         </div>

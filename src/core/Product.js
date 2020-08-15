@@ -60,7 +60,7 @@ const Product = (props) => {
                 <li className='nav-item'>
                     <Link 
                         className="nav-link pl-0"
-                        to="/shop"
+                        to={`/shop/${product.category && product.category._id}`}
                     >
                         {product.category && product.category.name}
                     </Link>
