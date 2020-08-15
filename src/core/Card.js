@@ -110,10 +110,12 @@ const Card = ({
                 <ShowImage item={product} url='product' />
                 <div className='name pt-1 pb-1 pl-1'>{product.name.substring(0, 20)}</div>
             </Link>
-                
+            <Link to={`/shop/${product.category._id}`} className=' '>
                 <p className='badge badge-primary badge-pill'>
                     {product.category && product.category.name}
                 </p>
+            </Link>    
+                
                 <div className='row justify-content-between'>
                     <h4 className='pb-0 mb-0 ml-3'>
                         ${product.price}

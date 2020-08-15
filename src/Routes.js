@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import Signup from './user/Signup'
 import Signin from './user/Signin'
 import Home from './core/Home'
+import ListProducts from './core/ListProducts'
 import PrivateRoute from './auth/PrivateRoute'
 import Dashboard from './user/UserDashboard'
 import AdminRoute from './auth/AdminRoute'
@@ -47,6 +48,7 @@ const Routes = () => {
                 />
                 <Route path='/product/:productId' exact component={Product} />
                 <Route path='/cart' exact component={Cart} />
+                <Route path='/shop/:categoryId' exact component={ListProducts} />
                 <AdminRoute
                     path='/admin/orders'
                     exact
