@@ -8,14 +8,20 @@ import { prices } from './fixedPrices'
 
 const Shop = () => {
     const [myFilters, setMyFilters] = useState({
-        filters: { category: [], price: [] }
+        filters: { category: [], price: [] },
+        reset: false
     })
+
+    
     const [categories, setCategories] = useState([])
     const [error, setError] = useState(false)
     const [limit, setLimit] = useState(6)
     const [skip, setSkip] = useState(0)
     const [size, setSize] = useState(0)
+    const [sortBy, setSortBy] = useState('')
     const [filteredResults, setFilteredResults] = useState([])
+    const {filters} = myFilters
+    const {sort} = filters
 
     //load categories and set form data
     const init = () => {
@@ -28,9 +34,9 @@ const Shop = () => {
         });
     };
 
-    const loadFilteredResults = newFilters => {
-        // console.log(newFilters)
-        getFilteredProducts(skip, limit, newFilters).then(data => {
+    const loadFilteredResults = () => {
+        const newFilter = myFilters.filters
+        getFilteredProducts(skip, limit, newFilter, sortBy).then(data => {
             if(data.error) {
                 setError(data.error)
             } else {
@@ -39,6 +45,10 @@ const Shop = () => {
                 setSkip(0)
             }
         })
+    }
+
+    const selectChange = (e) => {
+        setSortBy({sortBy: e.target.value})
     }
     
     const loadMore = () => {
@@ -67,8 +77,10 @@ const Shop = () => {
 
     useEffect(() => {
         init();
-        loadFilteredResults(skip, limit, myFilters.filters)
-    }, [])
+        // console.log('myFilter ',myFilters.filters)
+        const newFilter = myFilters.filters
+        loadFilteredResults(skip, limit, newFilter, sortBy)
+    }, [sortBy])
 
     const handleFilters = (filters, filterBy) => {
         // console.log( 'SHOP',filters, filterBy);
@@ -78,8 +90,10 @@ const Shop = () => {
             let priceValues = handlePrice(filters)
             newFilters.filters[filterBy] = priceValues
         }
-        loadFilteredResults(myFilters.filters)
+        const newFilter = myFilters.filters
+        loadFilteredResults(newFilter, sortBy)
         setMyFilters(newFilters)
+        
     }
 
     const handlePrice = value => {
@@ -125,6 +139,16 @@ const Shop = () => {
                 </div>
                 <div className='col-sm-10 col-md-9'>
                     <h2 className='mb-4'>Products</h2>
+                    <div className='form-group'>
+                        <select onChange={e => selectChange(e)} value={sortBy}>
+                            <option value='_idOrderByasc'>SortBy</option>
+                            <option value='priceOrderByasc'>Price ↓</option>
+                            <option value='priceOrderBydesc'>Price ↑</option>
+                            <option value='soldOrderBydesc'>Sold</option>
+                            <option value='updatedAtOrderByasc'>SortByNew</option>
+                            <option value='quantityOrderByasc'>Quantity ↓</option>
+                        </select>
+                    </div>
                     <div className='row'>
                         {filteredResults.map((product, i) => (
                             <div key={i} className='col-sm-12 col-md-5 col-lg-4 col-xl-3 mb-3'>
