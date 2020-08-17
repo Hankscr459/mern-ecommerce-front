@@ -20,8 +20,7 @@ const Shop = () => {
     const [size, setSize] = useState(0)
     const [sortBy, setSortBy] = useState('')
     const [filteredResults, setFilteredResults] = useState([])
-    const {filters} = myFilters
-    const {sort} = filters
+    const [reload, setReload] = useState(false)
 
     //load categories and set form data
     const init = () => {
@@ -31,10 +30,10 @@ const Shop = () => {
           } else {
             setCategories(data.data)
           }
-        });
-    };
+        })
+    }
 
-    const loadFilteredResults = () => {
+    const loadFilteredResults = (skip) => {
         const newFilter = myFilters.filters
         getFilteredProducts(skip, limit, newFilter, sortBy).then(data => {
             if(data.error) {
@@ -45,21 +44,27 @@ const Shop = () => {
                 setSkip(0)
             }
         })
+        
     }
 
     const selectChange = (e) => {
         setSortBy({sortBy: e.target.value})
+        if (reload == true) {
+            setSkip(0)
+            setReload(false)
+        }
     }
     
     const loadMore = () => {
         let toSkip = skip + limit
-        getFilteredProducts(toSkip, limit, myFilters.filters).then(data => {
+        getFilteredProducts(toSkip, limit, myFilters.filters, sortBy).then(data => {
             if(data.error) {
                 setError(data.error)
             } else {
                 setFilteredResults([ ...filteredResults, ...data.data])
                 setSize(data.size)
                 setSkip(toSkip)
+                setReload(true)
             }
         })
     }
@@ -76,8 +81,7 @@ const Shop = () => {
     }
 
     useEffect(() => {
-        init();
-        // console.log('myFilter ',myFilters.filters)
+        init()
         const newFilter = myFilters.filters
         loadFilteredResults(skip, limit, newFilter, sortBy)
     }, [sortBy])
@@ -91,6 +95,7 @@ const Shop = () => {
             newFilters.filters[filterBy] = priceValues
         }
         const newFilter = myFilters.filters
+        
         loadFilteredResults(newFilter, sortBy)
         setMyFilters(newFilters)
         
