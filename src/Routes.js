@@ -17,6 +17,7 @@ import Orders from './admin/Orders'
 import Profile from './user/Profile'
 import ManageProducts from './admin/MamageProduct'
 import UpdateProduct from './admin/UpdateProduct'
+import AddCoupon from './admin/AddCoupon'
 
 const Routes = () => {
     return (
@@ -45,6 +46,11 @@ const Routes = () => {
                     path='/create/product'
                     exact
                     component={AddProduct}
+                />
+                <AdminRoute
+                    path='/create/coupon'
+                    exact
+                    component={AddCoupon}
                 />
                 <Route path='/product/:productId' exact component={Product} />
                 <Route path='/cart' exact component={Cart} />

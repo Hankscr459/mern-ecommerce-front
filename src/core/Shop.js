@@ -49,7 +49,7 @@ const Shop = () => {
 
     const selectChange = (e) => {
         setSortBy({sortBy: e.target.value})
-        if (reload == true) {
+        if (reload === true) {
             setSkip(0)
             setReload(false)
         }
@@ -144,15 +144,17 @@ const Shop = () => {
                 </div>
                 <div className='col-sm-10 col-md-9'>
                     <h2 className='mb-4'>Products</h2>
-                    <div className='form-group'>
-                        <select onChange={e => selectChange(e)} value={sortBy}>
-                            <option value='_idOrderByasc'>SortBy</option>
-                            <option value='priceOrderByasc'>Price ↓</option>
-                            <option value='priceOrderBydesc'>Price ↑</option>
-                            <option value='soldOrderBydesc'>Sold</option>
-                            <option value='updatedAtOrderByasc'>SortByNew</option>
-                            <option value='quantityOrderByasc'>Quantity ↓</option>
-                        </select>
+                    <div className='row'>
+                        <div className='col-sm-5 col-md-3 col-xl-2 col-lg-3 mt-5 mb-4'>
+                            <select onChange={e => selectChange(e)} value={sortBy} className='form-control'>
+                                <option value='_idOrderByasc'>SortBy</option>
+                                <option value='priceOrderByasc'>Price ↓</option>
+                                <option value='priceOrderBydesc'>Price ↑</option>
+                                <option value='soldOrderBydesc'>Sold</option>
+                                <option value='updatedAtOrderByasc'>SortByNew</option>
+                                <option value='quantityOrderByasc'>Quantity ↓</option>
+                            </select>
+                        </div>
                     </div>
                     <div className='row'>
                         {filteredResults.map((product, i) => (

@@ -9,6 +9,7 @@ import {
 } from './apiCore'
 import { emptyCart } from './cartHelpers'
 import DropIn from 'braintree-web-drop-in-react'
+import { activeCode } from './apiCore'
 // import Card from './Card'
 
 const Checkout = ({ products, setRun = f => f, run = undefined }) => {
@@ -20,6 +21,11 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         instance: {},
         address: ''
     })
+
+    const [code, setCode] = useState('')
+    const [coupon, setCoupon] = useState()
+    const [CouponError ,setCouponError] = useState('')
+
 
     const userId = isAuthenticated() && isAuthenticated().user._id
     const token = isAuthenticated() && isAuthenticated().token
@@ -35,6 +41,42 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
             }
         })
     }
+
+    const handleChange = (e) =>{
+        setCouponError('')
+        setCode(e.target.value)
+    }
+
+    const couponForm = () => (
+        <form class='form-inline mt-3 mb-3' onSubmit={clickSubmit}>
+            <div className='form-group'>
+                <label className='text-muted mr-3'>Coupon Code:</label>
+                <input
+                    type='text'
+                    className='form-control'
+                    onChange={handleChange}
+                    value={code}
+                    required
+                />
+            </div>
+            <button type='submit' className='btn btn-primary'>
+                Active Coupon
+            </button>
+        </form>
+    )
+
+    const clickSubmit = (e) => {
+        e.preventDefault();
+        activeCode(code).then(data => {
+            if(data.error) {
+                setCouponError(data.error)
+            } else {
+                setCoupon(data)
+            }
+        })
+        
+    }
+
     useEffect(() => {
         getToken(userId, token)
     }, [])
@@ -45,7 +87,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
 
     const getTotal = () => {
         return products.reduce((currentValue, nextValue) =>{
-            return currentValue + nextValue.count * nextValue.price
+            return Math.floor(currentValue + nextValue.count * nextValue.price * (coupon ? coupon.amount/100 : 1))
         }, 0)
     }
 
@@ -83,6 +125,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                         }}
                         onInstance={instance => (data.instance = instance)}
                      />
+                     {couponForm()}
                      <button onClick={buy} className='btn btn-success btn-block'>
                         Pay
                     </button>
@@ -157,6 +200,15 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
         </div>
     )
 
+    const showCouponError = (CouponError) => (
+        <div
+            className='alert alert-danger'
+            style={{display: CouponError ? '' : 'none'}}
+        >
+            {CouponError}
+        </div>
+    )
+
     const showSuccess = (success) => (
         <div
             className='alert alert-info'
@@ -171,9 +223,11 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     return (
         <div>
             <h2>Total: ${getTotal()}</h2>
+            <p>{coupon && 'Coupon Actived'} </p>
             {showLoading(data.loading)}
             {showSuccess(data.success)}
             {showError(data.error)}
+            {showCouponError(CouponError)}
             {showCheCkout()}
         </div>
     )

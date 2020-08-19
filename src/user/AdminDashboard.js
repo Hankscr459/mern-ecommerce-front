@@ -23,6 +23,11 @@ const AdminDashboard = () => {
                         </Link>
                     </li>
                     <li className='list-group-item'>
+                        <Link className='nav-link' to='/create/coupon'>
+                            Create Coupon
+                        </Link>
+                    </li>
+                    <li className='list-group-item'>
                         <Link className='nav-link' to='/admin/orders'>
                             View Orders
                         </Link>
@@ -32,6 +37,7 @@ const AdminDashboard = () => {
                             Manage Products
                         </Link>
                     </li>
+                    
                 </ul>
             </div>
         )

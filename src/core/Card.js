@@ -17,18 +17,6 @@ const Card = ({
     const [redirect, setRedirect] = useState(false)
     const [count, setCount] = useState(product.count)
 
-    const showViewButton = (showViewProductButton) => {
-        return (
-            showViewProductButton && (
-                <Link to={`/product/${product._id}`} className='mr-1'>
-                    <button className='btn btn-outline-primary mb-1 mr-2'>
-                        View Product
-                    </button>
-                </Link>
-            )
-        )
-    }
-
     const addToCart = () => {
         addItem(product, () => {
             setRedirect(true)

@@ -147,3 +147,22 @@ export const updateProduct = (productId, userId, token, product) => {
         })
         .catch(err => console.log(err))
 }
+
+export const createCoupon = (userId, token, coupon) => {
+    // console.log( name, email, password)
+    return fetch(`${API}/coupon/create/${userId}`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(coupon)
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}

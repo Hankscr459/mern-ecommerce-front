@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import Layout from './Layout'
 import { getCart } from './cartHelpers'
-import Card from './Card'
+import CartItem from './CartItem'
 import Checkout from './Checkout'
 
 const Cart = () => {
@@ -18,17 +18,33 @@ const Cart = () => {
             <div>
                 <h2>Your cart has {`${items.length}`} items</h2>
                 <hr />
-                {items.map((product, i) => (
-                    <Card
-                        key={i}
-                        product={product}
-                        showAddToCartButton={false}
-                        cartUpdate={true}
-                        showRemoveProductButton={true}
-                        setRun={setRun}
-                        run={run}
-                    />
-                ))}
+                
+                    <table className='table'>
+                        <thead>
+                            <tr>
+                                <th scope='col'>Name</th>
+                                <th scope='col dn-430'></th>
+                                <th scope='col'>Quantity</th>
+                                <th scope='col'>price</th>
+                                <th scope='col'></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {items.map((product, i) => (
+                                <CartItem
+                                    key={i}
+                                    product={product}
+                                    showAddToCartButton={false}
+                                    cartUpdate={true}
+                                    showRemoveProductButton={true}
+                                    setRun={setRun}
+                                    run={run}
+                                />
+                            ))}
+                        </tbody>
+                    </table>
+                    
+                
             </div>
         )
     }
@@ -46,10 +62,10 @@ const Cart = () => {
             className='container-fluid'
         >
             <div className='row'>
-                <div className='col-6'>
+                <div className='col-lg-6 col-xl-6 col-md-6 col-sm-12 display-360'>
                     {items.length > 0 ? showItems(items) : noItemsMessage()}
                 </div>
-                <div className='col-6'>
+                <div className='col-lg-6 col-xl-6 col-md-6 col-sm-12'>
                     <h2 className='mb-4'>Your cart summary</h2>
                     <hr />
                     <Checkout products={items}  setRun={setRun} run={run} />

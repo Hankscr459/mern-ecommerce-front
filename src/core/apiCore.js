@@ -133,3 +133,47 @@ export const createOrder = (userId, token, createOrderData) => {
         })
         .catch(err => console.log(err))
 }
+
+export const activeCode = (couponCode) => {
+
+    const code = queryString.stringify({code: couponCode})
+    console.log('api couponCode: ', couponCode)
+    console.log('api code: ', code)
+
+    return fetch(`${API}/coupon/active?${code}`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        // body: JSON.stringify()
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
+
+// export const getFilteredProducts = (skip, limit, filters = {}, sort) => {
+//     const data = {
+//         limit,
+//         skip,
+//         filters
+//     }
+//     const sortBy = queryString.stringify(sort)
+//     console.log('sortBy', sortBy)
+//     return fetch(`${API}/products/by/search?${sortBy}`, {
+//         method: 'POST',
+//         headers: {
+//             Accept: 'application/json',
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => {
+//         return response.json()
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     })
+// }
