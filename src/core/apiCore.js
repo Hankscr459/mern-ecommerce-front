@@ -153,27 +153,3 @@ export const activeCode = (couponCode) => {
         })
         .catch(err => console.log(err))
 }
-
-// export const getFilteredProducts = (skip, limit, filters = {}, sort) => {
-//     const data = {
-//         limit,
-//         skip,
-//         filters
-//     }
-//     const sortBy = queryString.stringify(sort)
-//     console.log('sortBy', sortBy)
-//     return fetch(`${API}/products/by/search?${sortBy}`, {
-//         method: 'POST',
-//         headers: {
-//             Accept: 'application/json',
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(data)
-//     })
-//     .then(response => {
-//         return response.json()
-//     })
-//     .catch(err => {
-//         console.log(err)
-//     })
-// }

@@ -72,19 +72,35 @@ const Product = (props) => {
                     <span className='nav-link pl-0'>{product &&　product.name}</span>
                 </li>
             </ul>
-        <hr className='mt-4 mb-4' />
-                {product && product.description && (
-                    <ProductDetail product={product}  />
-                )}
-        <hr className='mt-5 mb-5' />
-        <h4 className='mt-5 mb-3'>Related product</h4>
-            <div className='row justify-content-center'>
-                {relatedProduct.map((p, i) => (
-                    <div key={i} className='md-col-3 sm-col-10 mb-3 ml-3'>
-                        <Card product={p} />
+            <hr className='mt-4 mb-4' />
+                    {product && product.description && (
+                        <ProductDetail product={product}  />
+                    )}
+            <hr className='mt-5 mb-5' />
+            
+            <div className='container'>
+                <h4 className='mt-5 mb-3'>Related product</h4>
+                <div className='row'>
+                    {relatedProduct.map((p, i) => (
+                        <div key={i} className='col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-3'>
+                            <Card product={p} />
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <hr className='mt-4 mb-5' />
+            <div className='container'>
+                <h4 className='mt-1 mb-4'>Reviews({product.reviews && product.reviews.length})</h4>
+                {product && product.reviews && product.reviews.map((r, i) => (
+                    <div key={i}>
+                        <hr className='mt-2 mb-2'/>
+                        <h5>{r.postBy}</h5>
+                        <h5>{r.headline}</h5>
+                        <p>{r.body}</p>
                     </div>
                 ))}
             </div>
+
         </Layout>
     )
 }

@@ -166,3 +166,58 @@ export const createCoupon = (userId, token, coupon) => {
         console.log(err)
     })
 }
+
+export const getCoupons = () => {
+    return fetch(`${API}/coupons`, {
+        method: 'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
+
+export const getCoupon = (couponId) => {
+    return fetch(`${API}/coupon/${couponId}`, {
+        method: 'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
+
+export const deleteCoupon = (couponId, userId, token) => {
+    return fetch(`${API}/coupon/${couponId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
+
+export const updateCoupon = (couponId, userId, token, coupon) => {
+    // console.log('couponId ', couponId)
+    // console.log('userId ', userId)
+    // console.log('token ', token)
+    console.log('coupon ', coupon)
+    return fetch(`${API}/coupon/${couponId}/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(coupon)
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}

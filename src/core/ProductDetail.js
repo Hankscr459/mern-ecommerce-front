@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { API } from '../config'
 import { Link, Redirect } from 'react-router-dom'
-import ShowImage from './ShowImage'
+import { isAuthenticated } from '../auth'
 import moment from 'moment'
 import { addItem, updateItem, removeItem } from './cartHelpers'
+import StarRatings from 'react-star-ratings';
 
 const ProductDetail = ({
     product,
@@ -23,6 +24,9 @@ const ProductDetail = ({
             setRedirect(true)
         })
     }
+
+    const userId = isAuthenticated() && isAuthenticated().user._id
+    const token = isAuthenticated() && isAuthenticated().token
 
     const shouldRedirect = redirect => {
         if(redirect) {
@@ -58,6 +62,10 @@ const ProductDetail = ({
             )
         )
     }
+    const userArray = product.reviews.map(r => r.user)
+    
+    useEffect(() => {
+    }, [])
 
     const showStuck = (quantity) => {
         return quantity > 0 ? (
@@ -90,14 +98,16 @@ const ProductDetail = ({
             </div>
     }
 
+
+
     return (
-        <div className=''>
+        <div className='container'>
             <div className='row'>
                 <h2 className='pb-5 ml-3'>{product.name}</h2>
             </div>
             {shouldRedirect(redirect)}
-            <div className='row justify-content-center'>
-                <div className='col-xl-1 col-lg-1 col-md-0 col-sm-0'></div>
+            {userArray.indexOf(userId) == -1 && (<p>can reviews</p>)}
+            <div className='row'>
                 <div className='col-xl-8 col-lg-8 col-md-9 col-sm-10'>
                     <img
                         src={`${API}/product/photo/${product._id}`}
@@ -123,15 +133,70 @@ const ProductDetail = ({
                         {showAddToCart(showAddToCartButton)}
                         {showRemoveBotton(showRemoveProductButton)}
                         {showCartUpdateOptions(cartUpdate)}
+                        <div>
+                            <StarRatings
+                                rating={product.averageRating}
+                                starDimension="25px"
+                                starSpacing="0px"
+                                starRatedColor="orange"
+                            />
+                                {' '}({product.averageRating})
+                        </div>
+                        <p>Total{' '}{product.reviews.length} reviews</p>
+                        <div>
+                            <StarRatings
+                                rating={5}
+                                starDimension="16px"
+                                starSpacing="0px"
+                                starRatedColor="orange"
+                            />
+                            {' '}({product.fiveStar}){' '}reviews
+                        </div>
+                        <div>
+                            <StarRatings
+                                rating={4}
+                                starDimension="16px"
+                                starSpacing="0px"
+                                starRatedColor="orange"
+                            />
+                            {' '}({product.fourStar}){' '}reviews
+                        </div>
+                        <div>
+                            <StarRatings
+                                rating={3}
+                                starDimension="16px"
+                                starSpacing="0px"
+                                starRatedColor="orange"
+                            />
+                            {' '}({product.threeStar}){' '}reviews
+                        </div>
+                        <div>
+                            <StarRatings
+                                rating={2}
+                                starDimension="16px"
+                                starSpacing="0px"
+                                starRatedColor="orange"
+                            />
+                            {' '}({product.twoStar}){' '}reviews
+                        </div>
+                        <div>
+                            <StarRatings
+                                rating={1}
+                                starDimension="16px"
+                                starSpacing="0px"
+                                starRatedColor="orange"
+                            />
+                            {' '}({product.oneStar}){' '}reviews
+                        </div>
                 </div>
             </div>
             <div className='row justify-content-end'>
-                <p className='mr-4'>
+                <p className='mr-3'>
                     Added on {moment(product.createdAt).fromNow()}
                 </p>
             </div>
             <div className='row justify-content-end'>
-                <p className='mr-4'>
+                <p className='mr-3'>
                     Updated on {moment(product.updatedAt).fromNow()}
                 </p>
             </div>

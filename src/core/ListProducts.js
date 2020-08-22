@@ -37,29 +37,31 @@ const ListProducts = (props) => {
             }
             className='container-fluid'
         >
-            <ul className="nav">
-                <li className='nav-item'>
-                    <Link 
-                        className="nav-link pl-0"
-                        to="/shop"
-                    >
-                        Shop
-                    </Link>
-                </li>
-                <li className='nav-item'>
-                    <span className='nav-link pl-0'>/</span>
-                </li>
-                <li className='nav-item'>
-                    <span className='nav-link pl-0'>{category.name}</span>
-                </li>
-            </ul>
-            <hr className='mt-2 mb-5' />
-            <div className='row justify-content-center'>
-                {products.map((product, i) => (
-                    <div key={i} className='col-xl-2 col-lg-3 col-md-4 col-sm-10 mb-3 ml-2'>
-                        <Card product={product} />
-                    </div>
-                ))}
+            <div className='container'>
+                <ul className="nav">
+                    <li className='nav-item'>
+                        <Link 
+                            className="nav-link pl-0"
+                            to="/shop"
+                        >
+                            Shop
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <span className='nav-link pl-0'>/</span>
+                    </li>
+                    <li className='nav-item'>
+                        <span className='nav-link pl-0'>{category.name}</span>
+                    </li>
+                </ul>
+                <hr className='mt-2 mb-5' />
+                <div className='row'>
+                    {products.map((product, i) => (
+                        <div key={i} className='col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3'>
+                            <Card product={product} />
+                        </div>
+                    ))}
+                </div>
             </div>
         </Layout>
     )

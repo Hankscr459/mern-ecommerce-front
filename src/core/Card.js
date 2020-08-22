@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import ShowImage from './ShowImage'
-import moment from 'moment'
+import StarRatings from 'react-star-ratings';
 import { addItem, updateItem, removeItem } from './cartHelpers'
 
 const Card = ({
@@ -58,14 +58,6 @@ const Card = ({
         )
     }
 
-    const showStuck = (quantity) => {
-        return quantity > 0 ? (
-            <h6 className='text-primary mr-3 mt-2'>In Stuck {quantity}</h6>
-        ) : (
-            <p className='text-danger mr-3 mt-2'>Out of Stuck</p>
-        )
-    }
-
     const handleChange = productId => event => {
         setRun(!run); // run useEffect in parent Cart
         setCount(event.target.value < 1 ? 1 : event.target.value)
@@ -90,7 +82,7 @@ const Card = ({
     }
 
     return (
-        <div className='card' style={{ maxWidth:'250px' }}>
+        <div className='card' style={{ maxWidth:'500px' }}>
             
             <div className='card-body'>
             {shouldRedirect(redirect)}
@@ -98,17 +90,28 @@ const Card = ({
                 <ShowImage item={product} url='product' />
                 <div className='name pt-1 pb-1 pl-1'>{product.name.substring(0, 20)}</div>
             </Link>
-            <Link to={`/shop/${product.category._id}`} className=' '>
-                <p className='badge badge-primary badge-pill'>
-                    {product.category && product.category.name}
-                </p>
-            </Link>    
+                <Link to={`/shop/${product.category._id}`} className='pt-3'>
+                    <p className='badge badge-primary badge-pill'>
+                        {product.category && product.category.name}
+                    </p>
+                </Link>    
+                <span className='ml-3'>
+                    <StarRatings
+                        rating={product.averageRating}
+                        starDimension="15px"
+                        starSpacing="0px"
+                        starRatedColor="orange"
+                    />
+                </span>
+                <span className='ml-2 mt-2 pt-0'>
+                    ({product.averageRating})
+                </span>
                 
                 <div className='row justify-content-between'>
                     <h4 className='pb-0 mb-0 ml-3'>
                         ${product.price}
                     </h4>
-                        {showStuck(product.quantity)}
+                    <h6 className='text-primary mr-3 mt-2'>Sold {product.sold}</h6>
                 </div>
                     <br />
                     {showAddToCart(showAddToCartButton)}

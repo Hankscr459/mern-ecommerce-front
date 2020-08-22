@@ -18,6 +18,8 @@ import Profile from './user/Profile'
 import ManageProducts from './admin/MamageProduct'
 import UpdateProduct from './admin/UpdateProduct'
 import AddCoupon from './admin/AddCoupon'
+import ManageCoupon from './admin/ManageCoupon'
+import UpdateCoupon from './admin/UpdateCoupon'
 
 const Routes = () => {
     return (
@@ -71,9 +73,19 @@ const Routes = () => {
                     component={ManageProducts}
                 />
                 <AdminRoute
+                    path='/admin/coupons'
+                    exact
+                    component={ManageCoupon}
+                />
+                <AdminRoute
                     path='/admin/product/update/:productId'
                     exact
                     component={UpdateProduct}
+                />
+                <AdminRoute
+                    path='/admin/coupon/update/:couponId'
+                    exact
+                    component={UpdateCoupon}
                 />
             </Switch>
         </BrowserRouter>

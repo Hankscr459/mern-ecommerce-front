@@ -65,9 +65,9 @@ const Search = () => {
                 <h2 className='mt-4 mb-4'>
                     {searchMessage(searched, results)}
                 </h2>
-                <div className='row justify-content-center'>
+                <div className='row'>
                     {results.map((product, i) => (
-                        <div key={i} className='col-xl-2 col-lg-3 col-md-4 col-sm-10 mb-3 ml-2'>
+                        <div key={i} className='col-xl-3 col-lg-4 col-md-5 col-sm-6 mb-3'>
                             <Card product={product} />
                         </div>
                     ))}

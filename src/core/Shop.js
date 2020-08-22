@@ -119,52 +119,54 @@ const Shop = () => {
             description='Searcch and find books of your choice'
             className='container-fluid'
         >
-            <div className='row justify-content-center'>
-                <div className='col-sm-10 col-md-3 col-lg-3'>
-                    <h4>Filter by category</h4>
-                    <ul>
-                        <Checkbox 
-                            categories={categories}
-                            handleFilters={filters =>
-                                handleFilters(filters, 'category')
-                            } 
-                        />
-                    </ul>
-                    <h4>Filter by price range</h4>
-                    <div>
-                        <ul className='list-unstyled'>
-                            <RadioBox 
-                                prices={prices}
+            <div className='container'>
+                <div className='row justify-content-center'>
+                    <div className='col-sm-12 col-md-3 col-lg-3 col-xl-3'>
+                        <h4>Filter by category</h4>
+                        <ul>
+                            <Checkbox 
+                                categories={categories}
                                 handleFilters={filters =>
-                                    handleFilters(filters, 'price')
+                                    handleFilters(filters, 'category')
                                 } 
                             />
                         </ul>
-                    </div>
-                </div>
-                <div className='col-sm-10 col-md-9'>
-                    <h2 className='mb-4'>Products</h2>
-                    <div className='row'>
-                        <div className='col-sm-5 col-md-3 col-xl-2 col-lg-3 mt-5 mb-4'>
-                            <select onChange={e => selectChange(e)} value={sortBy} className='form-control'>
-                                <option value='_idOrderByasc'>SortBy</option>
-                                <option value='priceOrderByasc'>Price ↓</option>
-                                <option value='priceOrderBydesc'>Price ↑</option>
-                                <option value='soldOrderBydesc'>Sold</option>
-                                <option value='updatedAtOrderByasc'>SortByNew</option>
-                                <option value='quantityOrderByasc'>Quantity ↓</option>
-                            </select>
+                        <h4>Filter by price range</h4>
+                        <div>
+                            <ul className='list-unstyled'>
+                                <RadioBox 
+                                    prices={prices}
+                                    handleFilters={filters =>
+                                        handleFilters(filters, 'price')
+                                    } 
+                                />
+                            </ul>
                         </div>
                     </div>
-                    <div className='row'>
-                        {filteredResults.map((product, i) => (
-                            <div key={i} className='col-sm-12 col-md-5 col-lg-4 col-xl-3 mb-3'>
-                                <Card product={product} />
+                    <div className='col-sm-12 col-md-9 col-lg-9 col-xl-9'>
+                        <h2 className='mb-4'>Products</h2>
+                        <div className='row'>
+                            <div className='col-sm-5 col-md-3 col-xl-2 col-lg-3 mt-5 mb-4'>
+                                <select onChange={e => selectChange(e)} value={sortBy} className='form-control'>
+                                    <option value='_idOrderByasc'>SortBy</option>
+                                    <option value='priceOrderByasc'>Price ↓</option>
+                                    <option value='priceOrderBydesc'>Price ↑</option>
+                                    <option value='soldOrderBydesc'>Sold</option>
+                                    <option value='updatedAtOrderByasc'>SortByNew</option>
+                                    <option value='quantityOrderByasc'>Quantity ↓</option>
+                                </select>
                             </div>
-                        ))}
+                        </div>
+                        <div className='row'>
+                            {filteredResults.map((product, i) => (
+                                <div key={i} className='col-sm-6 col-md-6 col-lg-6 col-xl-4 mb-3'>
+                                    <Card product={product} />
+                                </div>
+                            ))}
+                        </div>
+                        <hr />
+                        {loadMoreButton()}
                     </div>
-                    <hr />
-                    {loadMoreButton()}
                 </div>
             </div>
         </Layout>
