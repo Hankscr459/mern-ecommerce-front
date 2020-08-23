@@ -4,6 +4,8 @@ import Layout from './Layout'
 import { read, listRelated } from './apiCore'
 import Card from './Card'
 import ProductDetail from './ProductDetail'
+import { settings } from './SettingSlider'
+import Slider from 'react-slick'
 
 const Product = (props) => {
     const [product, setProduct] = useState({})
@@ -80,13 +82,14 @@ const Product = (props) => {
             
             <div className='container'>
                 <h4 className='mt-5 mb-3'>Related product</h4>
-                <div className='row'>
+                    
+                <Slider {...settings}>
                     {relatedProduct.map((p, i) => (
-                        <div key={i} className='col-sm-6 col-md-6 col-lg-4 col-xl-3 mb-3'>
+                        <div key={i} className=''>
                             <Card product={p} />
                         </div>
                     ))}
-                </div>
+                </Slider>
             </div>
             <hr className='mt-4 mb-5' />
             <div className='container'>

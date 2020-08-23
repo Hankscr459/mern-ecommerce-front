@@ -3,6 +3,8 @@ import Layout from './Layout'
 import { getProducts } from './apiCore'
 import Card from './Card'
 import Search from './Search'
+import { settings } from './SettingSlider'
+import Slider from 'react-slick'
 
 const Home = () => {
     const [productsBySell, setProductsBySell] = useState([])
@@ -40,25 +42,28 @@ const Home = () => {
             description='Node React E-commerce App'
             className='container-fluid'
         >
+
             <div className='container'>
                 <Search />
                 <h2 className='mb-4'>Best Sellers</h2>
-                <div className='row'>
-                    {productsBySell.map((product, i) => (
-                        <div key={i} className='col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3'>
-                            <Card product={product} />
-                        </div>
-                    ))}
-                </div>
                 
-                <h2 className='mb-4'>New Arrivals</h2>
-                <div className='row '>
-                    {productsByArrival.map((product, i) => (
-                        <div key={i} className='col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3'>
+                <Slider {...settings}>
+                    {productsBySell.map((product, i) => (
+                        <div key={i} className=''>
                             <Card product={product} />
                         </div>
                     ))}
-                </div>
+                </Slider>
+                <hr className='mt-5 mb-5' />
+                <h2 className='mb-4 mt-4'>New Arrivals</h2>
+                <Slider {...settings}>
+                    {productsByArrival.map((product, i) => (
+                        <div key={i} className=''>
+                            <Card product={product} />
+                        </div>
+                    ))}
+                </Slider>
+                <hr className='mt-5 mb-5' />
             </div>
         </Layout>
     )
