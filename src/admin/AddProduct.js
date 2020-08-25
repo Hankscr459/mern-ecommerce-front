@@ -3,12 +3,13 @@ import Layout from '../core/Layout'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 import { createProduct, getCategories } from './apiAdmin'
+import { Editor } from '@tinymce/tinymce-react'
 
 const AddProduct = () => {
 
     const [values, setValues] = useState({
         name: '',
-        description: '',
+        // description: '',
         price:'',
         categories: [],
         category: '',
@@ -22,10 +23,12 @@ const AddProduct = () => {
         formData: ''
     });
 
+    const [description, setDescription] = useState('')
+
     const {user, token} = isAuthenticated()
     const {
         name,
-        description,
+        // description,
         price,
         categories,
         // category,
@@ -66,6 +69,10 @@ const AddProduct = () => {
         formData.set(name, value)
         setValues({ ...values, [name]: value })
     }
+    const handleDescription = (e) => {
+        setDescription(e)
+        formData.set('description', e)
+    }
 
     const clickSubmit = (event) => {
         event.preventDefault();
@@ -77,13 +84,13 @@ const AddProduct = () => {
                 setValues({
                     ...values,
                     name: '',
-                    description: '',
                     photo: '',
                     price: '',
                     quantity: '',
                     loading: false,
                     createdProduct: data.name
                 })
+                setDescription('')
             }
         })
     }
@@ -108,15 +115,6 @@ const AddProduct = () => {
                     type='text'
                     className='form-control'
                     value={name}
-                />
-            </div>
-            <div className='form-group'>
-                <label className='text-muted'>Description</label>
-                <textarea
-                    onChange={handleChange('description')}
-                    type='text'
-                    className='form-control'
-                    value={description}
                 />
             </div>
             <div className='form-group'>
@@ -163,7 +161,28 @@ const AddProduct = () => {
                     value={quantity}
                 />
             </div>
-            <button className='btn btn-outline-primary'>Create Product</button>
+            <label className='text-muted'>Description:</label>
+            <Editor
+                apiKey='rbn80pwtv4ifwkn0n77q1s6fq0c9yepoo0dff4zto2gasvsw'
+                initialValue={description} 
+                init={{
+                selector: 'textarea',  // change this value according to your HTML
+                height: 500,
+                menubar: 'insert',
+                plugins: [
+                    'advlist autolink lists link image', 
+                    'charmap print preview anchor help',
+                    'searchreplace visualblocks code',
+                    'insertdatetime media table paste wordcount'
+                ],
+                toolbar:
+                    'undo redo | formatselect | bold italic | \
+                    alignleft aligncenter alignright | \
+                    bullist numlist outdent indent | image media'
+                }}
+                onEditorChange={handleDescription}
+            />
+            <button className='btn btn-outline-primary mt-4'>Create Product</button>
         </form>
     )
     
@@ -187,7 +206,7 @@ const AddProduct = () => {
         )
     
     const goBack = () => (
-        <div className="mt-5">
+        <div className="mt-5 mb-5">
             <Link to="/admin/dashboard" className="text-warning">
                 Back to Dashboard
             </Link>
@@ -200,12 +219,15 @@ const AddProduct = () => {
             className='container-fluid'
         >
             <div className='row'>
+            
                 <div className='col-md-8 offset-md-2'>
+                    {goBack()}
+                    <hr className='mt-5 mb-4' />
                     {showLoading()}
                     {showSuccess()}
                     {showError()}
                     {newPostForm()}
-                    {goBack()}
+                    <hr className='mt-5 mb-5' />
                 </div>
             </div>
         </Layout>

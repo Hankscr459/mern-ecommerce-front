@@ -6,6 +6,9 @@ import Card from './Card'
 import ProductDetail from './ProductDetail'
 import { settings } from './SettingSlider'
 import Slider from 'react-slick'
+import moment from 'moment'
+import StarRatings from 'react-star-ratings'
+import CreateReview from '../user/CreateReview'
 
 const Product = (props) => {
     const [product, setProduct] = useState({})
@@ -94,16 +97,42 @@ const Product = (props) => {
             <hr className='mt-4 mb-5' />
             <div className='container'>
                 <h4 className='mt-1 mb-4'>Reviews({product.reviews && product.reviews.length})</h4>
+                <div className='list-group'>
                 {product && product.reviews && product.reviews.map((r, i) => (
-                    <div key={i}>
-                        <hr className='mt-2 mb-2'/>
-                        <h5>{r.postBy}</h5>
-                        <h5>{r.headline}</h5>
-                        <p>{r.body}</p>
-                    </div>
+                    <li key={i} className='list-group-item'>
+                        <div className='row'>
+                            <div className='col-sm-12 col-md-3 col-lg-2 col-xl-1'>
+                                <img 
+                                    className='rounded-circle'
+                                    src='https://s.gravatar.com/avatar/4f3bd4380429c206fdd43aec0a6482e0?d=mm' 
+                                />
+                                <h5>{r.postBy}</h5>
+                            </div>
+                            <div className='col-sm-12 col-md-9 col-lg-10 col-xl-11'>
+                                <StarRatings
+                                    rating={r.rating}
+                                    starDimension="25px"
+                                    starSpacing="0px"
+                                    starRatedColor="orange"
+                                />
+                                <h5>{r.headline}</h5>
+                                <p>{r.body}</p>
+                            </div>
+                        </div>
+                        <div className='row justify-content-end'>
+                            Added on {moment(r.createdAt).fromNow()}
+                        </div>
+                    </li>
                 ))}
+                </div>
             </div>
 
+            <hr className='mt-5 mb-5' />
+
+            
+            {product && product.description && (
+                <CreateReview product={product} />
+            )}
         </Layout>
     )
 }

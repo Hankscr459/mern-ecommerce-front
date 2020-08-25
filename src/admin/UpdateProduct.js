@@ -3,12 +3,17 @@ import Layout from '../core/Layout'
 import { isAuthenticated } from '../auth'
 import { Link, Redirect } from 'react-router-dom'
 import { getProduct, getCategories, updateProduct } from './apiAdmin'
+import { Editor } from '@tinymce/tinymce-react'
+// import { TINY } from '../config'
+// import $ from 'jquery';
+// window.jQuery = window.$ = $;
 
 const UpdateProduct = ({match}) => {
 
+
     const [values, setValues] = useState({
         name: '',
-        description: '',
+        // description: '',
         price:'',
         categories: [],
         category: '',
@@ -21,11 +26,13 @@ const UpdateProduct = ({match}) => {
         redirectToProfile: false,
         formData: ''
     });
+
+    const [description, setDescription] = useState('')
+
     const [categories, setCategories] = useState([])
     const {user, token} = isAuthenticated()
     const {
         name,
-        description,
         price,
         // categories,
         // category,
@@ -49,12 +56,13 @@ const UpdateProduct = ({match}) => {
                     ...values,
                     name: data.name,
                     price: data.price,
-                    description: data.description,
+                    // description: data.description,
                     category: data.category._id,
                     shipping: data.shipping,
                     quantity: data.quantity,
                     formData: new FormData()
                 })
+                setDescription(data.description)
                 // load categories
                 initCategories()
             }
@@ -84,12 +92,19 @@ const UpdateProduct = ({match}) => {
     // two arrow: it is high order function to function is returning anthor function
     const handleChange = name => event => {
         const value = name === 'photo' ? event.target.files[0] : event.target.value
+        console.log(value)
         formData.set(name, value)
         setValues({ ...values, [name]: value })
     }
 
+    const handleDescription = (e) => {
+        setDescription(e)
+        formData.set('description', e)
+    }
+
     const clickSubmit = (event) => {
         event.preventDefault();
+        
         setValues({ ...values, error: '', loading: true });
         updateProduct(match.params.productId, user._id, token, formData ).then(data => {
             if (data.error) {
@@ -98,7 +113,7 @@ const UpdateProduct = ({match}) => {
                 setValues({
                     ...values,
                     name: '',
-                    description: '',
+                    // description: '',
                     photo: '',
                     price: '',
                     quantity: '',
@@ -134,15 +149,6 @@ const UpdateProduct = ({match}) => {
                 />
             </div>
             <div className='form-group'>
-                <label className='text-muted'>Description</label>
-                <textarea
-                    onChange={handleChange('description')}
-                    type='text'
-                    className='form-control'
-                    value={description}
-                />
-            </div>
-            <div className='form-group'>
                 <label className='text-muted'>Price</label>
                 <input
                     onChange={handleChange('price')}
@@ -151,6 +157,7 @@ const UpdateProduct = ({match}) => {
                     value={price}
                 />
             </div>
+            
             <div className='form-group'>
                 <label className='text-muted'>Category</label>
                 <select
@@ -186,7 +193,33 @@ const UpdateProduct = ({match}) => {
                     value={quantity}
                 />
             </div>
-            <button className='btn btn-outline-primary'>Update Product</button>
+            <Editor
+                apiKey='rbn80pwtv4ifwkn0n77q1s6fq0c9yepoo0dff4zto2gasvsw'
+                initialValue={description} 
+                init={{
+                    selector: 'textarea',  // change this value according to your HTML
+                    height: 500,
+                    menubar: 'insert',
+                    plugins: [
+                        'advlist autolink lists link image', 
+                        'charmap print preview anchor help',
+                        'searchreplace visualblocks code',
+                        'insertdatetime media table paste wordcount'
+                    ],
+                    toolbar:
+                        'undo redo | formatselect | bold italic | \
+                        alignleft aligncenter alignright | \
+                        bullist numlist outdent indent | image media',
+                    mobile: {
+                      theme: "mobile",
+                      plugins: [ "autosave", "lists", "autolink" ],
+                      toolbar: [ "undo", "bold", "italic", "styleselect" ] 
+                  } 
+                }}
+                onEditorChange={handleDescription}
+            />
+            
+            <button className='btn btn-outline-primary mt-4 '>Update Product</button>
         </form>
     )
     
@@ -222,6 +255,7 @@ const UpdateProduct = ({match}) => {
             <Link to="/admin/dashboard" className="text-warning">
                 Back to Dashboard
             </Link>
+            <hr className='mb-5 mt-5' />
         </div>
     );
     return (
@@ -232,12 +266,13 @@ const UpdateProduct = ({match}) => {
         >
             <div className='row'>
                 <div className='col-md-8 offset-md-2'>
+                    {goBack()}
                     {showLoading()}
                     {showSuccess()}
                     {showError()}
                     {newPostForm()}
-                    {goBack()}
                     {redirectUser()}
+                    <hr className='mb-5 mt-5' />
                 </div>
             </div>
         </Layout>

@@ -43,25 +43,46 @@ const ManageCoupon = () => {
             <div className='col-12'>
             <h2 className='text-center'>Total {coupons.length} Coupons</h2>
             <hr />
-                <ul className='list-group'>
-                    {coupons.map((c, i) => (
-                        <li 
-                            key={i}
-                            className='list-group-item d-flex justify-content-between align-items-center'
-                        >
-                            <strong>{c.name}</strong>
-                            <Link to={`/admin/coupon/update/${c._id}`}>
-                                <span className='badge badge-warning badge-pill'>Update</span>
-                            </Link>
-                            <span
-                                onClick={() => destory(c._id)}
-                                className='badge badge-danger badge-pill'
+                <table className='table'>
+                    <thead>
+                        <tr className='text-center'>
+                            <th scope='col'>Name</th>
+                            <th scope='col'>Discount(%)</th>
+                            <th scope='col'>ExpireDate</th>
+                            <th scope='col'>Option</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody>
+                        {coupons.map((c, i) => (
+                            <tr
+                                key={i}
+                                className='text-center'
                             >
-                                Delete
-                            </span>
-                        </li>
-                    ))}
-                </ul>
+                                <th scope='row'>
+                                    <strong>{c.name}</strong>
+                                </th>
+                                <td>
+                                    <strong>{c.amount}</strong>
+                                </td>
+                                <td>
+                                    <strong>{c.expireDate.substring(0,10)}</strong>
+                                </td>
+                                <td>
+                                    <Link to={`/admin/coupon/update/${c._id}`}>
+                                        <button className='btn btn-outline-primary rounded mr-2'>Update</button>
+                                    </Link>
+                                    <button
+                                        onClick={() => destory(c._id)}
+                                        className='btn btn-outline-danger rounded'
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
         </Layout>

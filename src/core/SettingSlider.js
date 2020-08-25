@@ -19,18 +19,14 @@ export const settings = {
         breakpoint: 600,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-          infinite: true
+          slidesToScroll: 2
         }
       },
       {
         breakpoint: 550,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-          infinite: true
+          slidesToScroll: 1
         }
       }
     ]

@@ -48,7 +48,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
     }
 
     const couponForm = () => (
-        <form class='form-inline mt-3 mb-3' onSubmit={clickSubmit}>
+        <form className='form-inline mt-3 mb-3' onSubmit={clickSubmit}>
             <div className='form-group'>
                 <label className='text-muted mr-3'>Coupon Code:</label>
                 <input
@@ -58,10 +58,10 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                     value={code}
                     required
                 />
+                <button type='submit' className='btn btn-primary'>
+                    Active Coupon
+                </button>
             </div>
-            <button type='submit' className='btn btn-primary'>
-                Active Coupon
-            </button>
         </form>
     )
 
@@ -126,7 +126,7 @@ const Checkout = ({ products, setRun = f => f, run = undefined }) => {
                         onInstance={instance => (data.instance = instance)}
                      />
                      {couponForm()}
-                     <button onClick={buy} className='btn btn-success btn-block'>
+                     <button onClick={buy} className='btn btn-success btn-block mb-5 mt-3'>
                         Pay
                     </button>
                 </div>
