@@ -1,4 +1,5 @@
 import { API } from '../config';
+import queryString from 'query-string'
 
 export const createCategory = (userId, token, category) => {
     // console.log( name, email, password)
@@ -195,6 +196,22 @@ export const deleteCoupon = (couponId, userId, token) => {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`
         },
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
+
+export const deleMenyCoupon = (userId, token, allId) => {
+    console.log(allId)
+    return fetch(`${API}/coupons/${userId}/${allId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
     })
         .then(response => {
             return response.json()

@@ -4,7 +4,8 @@ import { isAuthenticated } from '../auth'
 import { Link, Redirect } from 'react-router-dom'
 import { getProduct, getCategories, updateProduct } from './apiAdmin'
 import { Editor } from '@tinymce/tinymce-react'
-// import { TINY } from '../config'
+import { initPlugins } from '../helpers/tiny'
+import { TINY } from '../config'
 // import $ from 'jquery';
 // window.jQuery = window.$ = $;
 
@@ -193,29 +194,11 @@ const UpdateProduct = ({match}) => {
                     value={quantity}
                 />
             </div>
+            <label className='text-muted'>Description:</label>
             <Editor
-                apiKey='rbn80pwtv4ifwkn0n77q1s6fq0c9yepoo0dff4zto2gasvsw'
+                apiKey="rbn80pwtv4ifwkn0n77q1s6fq0c9yepoo0dff4zto2gasvsw"
                 initialValue={description} 
-                init={{
-                    selector: 'textarea',  // change this value according to your HTML
-                    height: 500,
-                    menubar: 'insert',
-                    plugins: [
-                        'advlist autolink lists link image', 
-                        'charmap print preview anchor help',
-                        'searchreplace visualblocks code',
-                        'insertdatetime media table paste wordcount'
-                    ],
-                    toolbar:
-                        'undo redo | formatselect | bold italic | \
-                        alignleft aligncenter alignright | \
-                        bullist numlist outdent indent | image media',
-                    mobile: {
-                      theme: "mobile",
-                      plugins: [ "autosave", "lists", "autolink" ],
-                      toolbar: [ "undo", "bold", "italic", "styleselect" ] 
-                  } 
-                }}
+                init={initPlugins}
                 onEditorChange={handleDescription}
             />
             
