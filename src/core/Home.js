@@ -2,7 +2,6 @@ import React, { useState, useEffect} from 'react'
 import Layout from './Layout'
 import { getProducts } from './apiCore'
 import Card from './Card'
-import Search from './Search'
 import { settings } from './SettingSlider'
 import Slider from 'react-slick'
 
@@ -44,7 +43,6 @@ const Home = () => {
         >
 
             <div className='container'>
-                <Search />
                 <h2 className='mb-4'>Best Sellers</h2>
                 
                 <Slider {...settings}>

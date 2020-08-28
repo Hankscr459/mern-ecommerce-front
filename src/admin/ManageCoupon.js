@@ -51,9 +51,9 @@ const ManageCoupon = () => {
 
     const CouponIdAll = () => {
         setSelect(!select)
-        if(select == true) {
+        if(select === true) {
             setChecked(allCouponId)
-        } else if (select == false) {
+        } else if (select === false) {
             setChecked([])
         }
     }

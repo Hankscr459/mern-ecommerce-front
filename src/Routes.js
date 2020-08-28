@@ -20,6 +20,7 @@ import UpdateProduct from './admin/UpdateProduct'
 import AddCoupon from './admin/AddCoupon'
 import ManageCoupon from './admin/ManageCoupon'
 import UpdateCoupon from './admin/UpdateCoupon'
+import FindProducts from './core/FindProducts'
 
 const Routes = () => {
     return (
@@ -27,6 +28,7 @@ const Routes = () => {
             <Switch>
                 <Route path='/' exact component={Home} />
                 <Route path='/shop' exact component={Shop} />
+                <Route path='/products/find' exact component={FindProducts} />
                 <Route path='/signin' exact component={Signin} />
                 <Route path='/signup' exact component={Signup} />
                 <PrivateRoute

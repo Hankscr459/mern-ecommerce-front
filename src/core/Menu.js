@@ -2,10 +2,11 @@ import React, { Fragment } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { signout, isAuthenticated } from '../auth'
 import { itemTotal } from './cartHelpers'
+import Search from './Search'
 
 const isActive = ( history, path ) => {
     if(history.location.pathname === path ) {
-        return { color: '#ff9900' }
+        return { color: '#0A127D' }
     } else {
         return { color: 'white' }
     }
@@ -13,7 +14,7 @@ const isActive = ( history, path ) => {
 
 const Menu = ({ history }) => (
     <div>
-        <nav className="navbar navbar-expand-md navbar-light  bg-primary">
+        <nav className="navbar navbar-expand-md navbar-light" style={{'backgroundColor': '#4DCFFF'}}>
             <li className='navbar-nav nav-item'>
                 <Link 
                     className=" nav-link mb-0 ml-0 h5 font-weight-bold"
@@ -55,7 +56,7 @@ const Menu = ({ history }) => (
                         >
                             Cart{' '}
                             <sup>
-                                <small className='cart-badge'>{itemTotal()}</small>
+                                <small className='cart-badge text-white'>{itemTotal()}</small>
                             </sup>
                         </Link>
                     </li>
@@ -120,6 +121,7 @@ const Menu = ({ history }) => (
                             </span>
                         </li>
                     )}
+                    <Search />
                 </ul>
             </div>
         </nav>

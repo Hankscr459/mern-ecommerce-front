@@ -29,7 +29,7 @@ export const getFilteredProducts = (skip, limit, filters = {}, sort) => {
     }
     const sortBy = queryString.stringify(sort)
     console.log('sortBy', sortBy)
-    return fetch(`${API}/products/by/search?${sortBy}`, {
+    return fetch(`${API}/products/by/search${sortBy}`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
@@ -152,4 +152,18 @@ export const activeCode = (couponCode) => {
             return response.json()
         })
         .catch(err => console.log(err))
+}
+
+export const search = (params) => {
+    // console.log('search params', params)
+    const query = queryString.stringify(params)
+    console.log('query params', query)
+    
+    return fetch(`${API}/products/find?${query}`, {
+        method: 'GET'
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => console.log(err))
 }
