@@ -8,7 +8,6 @@ import Card from './Card'
 const FindProducts = (props) => {
     const [error, setError] = useState(false)
     const [products, setProducts] = useState([])
-    const [localSearch, setLocalSearch] =useState(props.location.search)
 
     const loadProducts = (query) => {
         search(query).then(data => {
@@ -17,7 +16,7 @@ const FindProducts = (props) => {
     }
 
     useEffect(() => {
-        const query = queryString.parse(localSearch)
+        const query = queryString.parse(props.location.search)
         console.log('useEffect', query)
         loadProducts(query)
     }, [])
