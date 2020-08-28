@@ -29,7 +29,7 @@ export const getFilteredProducts = (skip, limit, filters = {}, sort) => {
     }
     const sortBy = queryString.stringify(sort)
     console.log('sortBy', sortBy)
-    return fetch(`${API}/products/by/search${sortBy}`, {
+    return fetch(`${API}/products/by/search?${sortBy}`, {
         method: 'POST',
         headers: {
             Accept: 'application/json',
