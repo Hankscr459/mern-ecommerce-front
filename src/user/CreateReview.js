@@ -4,19 +4,24 @@ import { createReview } from './apiUser'
 
 export const CreateReview = ({product}) => {
 
+    const {
+        user: { _id, name }
+    } = isAuthenticated()
+    const userId = _id
+
     const [values, setValues] = useState({
         headline: '',
         body: '',
-        postBy: '',
+        postBy: name,
         rating: 1,
         error: false
     })
+    
 
     const [show, setShow] = useState('')
 
     const { headline, body, rating, error } = values
-    const userId = isAuthenticated() && isAuthenticated().user._id
-    const username = isAuthenticated() && isAuthenticated().user.name
+    
 
     const handleChange = name => event => {
         setValues({ ...values, error: false, [name]: event.target.value })
@@ -26,8 +31,8 @@ export const CreateReview = ({product}) => {
         event.preventDefault();
         const token = isAuthenticated() && isAuthenticated().token
         const productId = product._id
-        setValues({ ...values, error: false, postBy: username })
-        createReview(userId, productId, token,  values)
+        setValues({ ...values, error: false, postBy: name })
+        createReview(userId, productId, token, values)
         .then(data => {
             if (data.error) {
                 setValues({ ...values, error: data.error })

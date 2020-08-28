@@ -20,7 +20,7 @@ const FindProducts = (props) => {
         console.log('useEffect', query)
         console.log('useEffect typeof: ', typeof query)
         loadProducts(query)
-    }, [])
+    }, [props.location.search])
 
     return (
         <Layout

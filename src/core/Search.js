@@ -17,7 +17,8 @@ const Search = (props) => {
         state: `${query}`
     }
 
-    const onSubmit = () => {
+    const onSubmit = (e) => {
+        e.preventDefault()
         props.history.push(location)
     }
 
