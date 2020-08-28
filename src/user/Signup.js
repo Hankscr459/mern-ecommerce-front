@@ -49,6 +49,7 @@ const Signup = () => {
                     type='text'
                     className='form-control'
                     value={name}
+                    disabled={true}
                 />
             </div>
 
@@ -59,6 +60,7 @@ const Signup = () => {
                     type='email'
                     className='form-control'
                     value={email}
+                    disabled={true}
                 />
             </div>
 
@@ -69,6 +71,7 @@ const Signup = () => {
                     type='password'
                     className='form-control'
                     value={password}
+                    disabled={true}
                 />
             </div>
             <button

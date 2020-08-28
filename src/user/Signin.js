@@ -5,8 +5,8 @@ import { signin, authenticate, isAuthenticated } from '../auth'
 
 const Signin = () => {
     const [values, setValues] = useState({
-        email:'black123@gmail.com',
-        password:'123456',
+        email:'',
+        password:'',
         error:'',
         loading: false,
         redirectToReferrer: false
@@ -47,6 +47,7 @@ const Signin = () => {
                     type='email'
                     className='form-control'
                     value={email}
+                    disabled={true}
                 />
             </div>
 
@@ -57,6 +58,7 @@ const Signin = () => {
                     type='password'
                     className='form-control'
                     value={password}
+                    disabled={true}
                 />
             </div>
             <button

@@ -18,6 +18,7 @@ const FindProducts = (props) => {
     useEffect(() => {
         const query = queryString.parse(props.location.search)
         console.log('useEffect', query)
+        console.log('useEffect typeof: ', typeof query)
         loadProducts(query)
     }, [])
 
