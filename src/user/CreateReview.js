@@ -4,10 +4,8 @@ import { createReview } from './apiUser'
 
 export const CreateReview = ({product}) => {
 
-    const {
-        user: { _id, name }
-    } = isAuthenticated()
-    const userId = _id
+    const userId = isAuthenticated() && isAuthenticated().user._id
+    const name = isAuthenticated() && isAuthenticated().user.name
 
     const [values, setValues] = useState({
         headline: '',

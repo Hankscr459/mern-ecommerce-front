@@ -11,6 +11,10 @@ const Search = (props) => {
         // console.log(search)
     }
 
+    const reset = () => {
+        setQuery('')
+    }
+
     const location = {
         pathname: '/products/find',
         search: `?search=${query}`,
@@ -51,7 +55,12 @@ const Search = (props) => {
                         <use xlinkHref="#sbx-icon-search-16"></use>
                     </svg>
                     </button>
-                    <button type="reset" title="Clear the search query." className="sbx-custom__reset">
+                    <button 
+                        type="reset" 
+                        title="Clear the search query." 
+                        className="sbx-custom__reset"
+                        onClick={reset}
+                    >
                         <svg role="img" aria-label="Reset">
                             <use xlinkHref="#sbx-icon-clear-5"></use>
                         </svg>

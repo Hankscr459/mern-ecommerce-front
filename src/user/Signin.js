@@ -47,7 +47,6 @@ const Signin = () => {
                     type='email'
                     className='form-control'
                     value={email}
-                    disable={true}
                 />
             </div>
 
@@ -58,7 +57,6 @@ const Signin = () => {
                     type='password'
                     className='form-control'
                     value={password}
-                    disable={true}
                 />
             </div>
             <button
