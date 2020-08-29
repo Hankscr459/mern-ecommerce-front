@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { withRouter } from 'react-router-dom'
-import '../css/search.css'
+import '../../css/search.css'
 
 const Search = (props) => {
     const [query, setQuery] = useState('')

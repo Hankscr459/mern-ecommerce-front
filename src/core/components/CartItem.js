@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { API } from '../config'
+import { API } from '../../config'
 import { Link, Redirect } from 'react-router-dom'
 import ShowImage from './ShowImage'
 import { addItem, updateItem, removeItem } from './cartHelpers'

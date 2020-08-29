@@ -1,15 +1,15 @@
 import React, { useState, useEffect} from 'react'
-import { isAuthenticated } from '../auth'
+import { isAuthenticated } from '../../auth'
 import { Link } from 'react-router-dom'
 // import Layout from './Layout'
 import {
     getBraintreeClientToken,
     processPayment,
     createOrder
-} from './apiCore'
+} from '../apiCore'
 import { emptyCart } from './cartHelpers'
 import DropIn from 'braintree-web-drop-in-react'
-import { activeCode } from './apiCore'
+import { activeCode } from '../apiCore'
 // import Card from './Card'
 
 const Checkout = ({ products, setRun = f => f, run = undefined }) => {

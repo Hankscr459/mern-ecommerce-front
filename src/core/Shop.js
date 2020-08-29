@@ -1,10 +1,10 @@
 import React, { useState, useEffect} from 'react'
 import Layout from './Layout'
-import Card from './Card'
+import Card from './components/Card'
 import { getCategories, getFilteredProducts } from './apiCore'
-import Checkbox from './Checkbox'
-import RadioBox from './RadioBox'
-import { prices } from './fixedPrices'
+import Checkbox from './components/Checkbox'
+import RadioBox from './components/RadioBox'
+import { prices } from '../helpers/fixedPrices'
 
 const Shop = () => {
     const [myFilters, setMyFilters] = useState({

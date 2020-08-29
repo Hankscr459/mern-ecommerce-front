@@ -2,7 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import Layout from './Layout'
 import { readProducts } from './apiCore'
-import Card from './Card'
+import Card from './components/Card'
 
 const ListProducts = (props) => {
     const [error, setError] = useState(false)

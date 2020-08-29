@@ -11,10 +11,5 @@ export const initPlugins = {
     toolbar:
         'undo redo | formatselect | bold italic | \
         alignleft aligncenter alignright | \
-        bullist numlist outdent indent | image media',
-    mobile: {
-      theme: "mobile",
-      plugins: [ "autosave", "lists", "autolink" ],
-      toolbar: [ "undo", "bold", "italic", "styleselect" ] 
-  } 
+        bullist numlist outdent indent | image media'
 }

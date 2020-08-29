@@ -1,7 +1,7 @@
 export const settings = {
     dots: true,
     infinite: false,
-    speed: 300,
+    speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
@@ -11,23 +11,27 @@ export const settings = {
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true
+          infinite: true,
+          dots: true
         }
       },
       {
-        breakpoint: 600,
+        breakpoint: 780,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 2,
-          infinite: true
+          initialSlide: 2,
+          infinite: true,
+          dots: true
         }
       },
       {
-        breakpoint: 480,
+        breakpoint: 550,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true
+          infinite: true,
+          dots: true
         }
       }
     ]

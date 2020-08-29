@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { API } from '../config'
+import { API } from '../../config'
 import { Link, Redirect } from 'react-router-dom'
 import moment from 'moment'
 import { addItem } from './cartHelpers'
