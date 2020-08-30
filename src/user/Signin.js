@@ -100,10 +100,16 @@ const Signin = () => {
             description='Signin to Node React E-commerce App'
             className='container col-md-8 offset-md-2'
         >
-            {showLoading()}
-            {showError()}
-            {SigninForm()}
-            {redirectUser()}
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-xl-6 offset-xl-3 col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-sm-8 offset-sm-2'>
+                        {showLoading()}
+                        {showError()}
+                        {SigninForm()}
+                        {redirectUser()}
+                    </div>
+                </div>
+            </div>
         </Layout>
     )
 };

@@ -144,12 +144,14 @@ const AddCoupon = () => {
             description={`G'day ${user.name}, ready to add a new Coupon?`}
             className='container-fluid'
         >
-            <div className='row'>
-                <div className='col-md-8 offset-md-2'>
-                    {goBack()}
-                    {showSuccess()}
-                    {showError()}
-                    {newCouponForm()}
+            <div className='container'>
+                <div className='row'>
+                    <div className='col-md-6 offset-md-3 col-sm-6 offset-sm-3'>
+                        {goBack()}
+                        {showSuccess()}
+                        {showError()}
+                        {newCouponForm()}
+                    </div>
                 </div>
             </div>
         </Layout>

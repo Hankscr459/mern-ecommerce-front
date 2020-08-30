@@ -3,8 +3,6 @@ import Layout from '../core/Layout'
 import { isAuthenticated } from '../auth'
 import { Link } from 'react-router-dom'
 import { getCoupons, deleteCoupon, deleMenyCoupon } from './apiAdmin'
-import $ from 'jquery';
-window.jQuery = window.$ = $;
 
 const ManageCoupon = () => {
     const [coupons, setCoupons] = useState([])
@@ -36,24 +34,19 @@ const ManageCoupon = () => {
     }
 
     const selectAll = () => {
-        // Listen for click on toggle checkbox
-        $('#select-all').click(function() {   
-            if(this.checked) {
-                // Iterate each checkbox
-                $(':checkbox').prop('checked', true);
-                
-            } else {
-                $(':checkbox').prop('checked', false);
-                 
-            }
-        })
-    }
-
-    const CouponIdAll = () => {
         setSelect(!select)
+        const items = document.getElementsByName('acs')
         if(select === true) {
+            for(let i=0; i<items.length; i++) {
+                if(items[i].type == 'checkbox') {
+                items[i].checked = true
+            }}
             setChecked(allCouponId)
         } else if (select === false) {
+            for(let i=0; i<items.length; i++) {
+                if(items[i].type == 'checkbox') {
+                items[i].checked = false
+            }}
             setChecked([])
         }
     }
@@ -84,6 +77,7 @@ const ManageCoupon = () => {
                 } else {
                     loadCoupons()
                     setChecked([])
+                    setSelect(true)
                 }
             })
         }
@@ -91,8 +85,7 @@ const ManageCoupon = () => {
 
     useEffect(() => {
         loadCoupons()
-        selectAll()
-        CouponIdAll(select)
+        selectAll(select)
     }, [])
 
     return (
@@ -119,7 +112,8 @@ const ManageCoupon = () => {
                                     type='checkbox' 
                                     name="select-all" 
                                     id="select-all" 
-                                    onClick={selectAll,CouponIdAll}
+                                    onClick={selectAll}
+                                    checked={!select}
                                 />
                             </th>
                             <th scope='col'>Name</th>
@@ -138,8 +132,7 @@ const ManageCoupon = () => {
                                 <th scope='row'>
                                     <input 
                                         type='checkbox' 
-                                        name={`checkbox-${i}`} 
-                                        id={`checkbox-${i}`} 
+                                        name='acs'
                                         onClick={handleToggle(c._id)}
                                     />
                                 </th>
