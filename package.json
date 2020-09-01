@@ -12,6 +12,8 @@
     "query-string": "^6.13.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-dropzone": "^11.0.3",
+    "react-image-gallery": "^1.0.8",
     "react-render-html": "^0.6.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",

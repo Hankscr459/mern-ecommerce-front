@@ -7,6 +7,16 @@
     box-sizing: border-box;
     font-size: 16px;
   }
+  @media only screen and (max-width: 359px) {
+    .sbx-custom {
+      width: 280px;
+    }
+  }
+  @media only screen and (max-width: 318px) {
+    .sbx-custom {
+      width: 250px;
+    }
+  }
   
   .sbx-custom__wrapper {
     width: 100%;
@@ -33,6 +43,8 @@
        -moz-appearance: none;
             appearance: none;
   }
+
+
   
   .sbx-custom__input::-webkit-search-decoration, .sbx-custom__input::-webkit-search-cancel-button, .sbx-custom__input::-webkit-search-results-button, .sbx-custom__input::-webkit-search-results-decoration {
     display: none;

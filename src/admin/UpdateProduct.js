@@ -5,9 +5,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { getProduct, getCategories, updateProduct } from './apiAdmin'
 import { Editor } from '@tinymce/tinymce-react'
 import { initPlugins } from '../helpers/tiny'
-import { TINY } from '../config'
-// import $ from 'jquery';
-// window.jQuery = window.$ = $;
+import UpdateUpload from './components/UpdateUpload'
 
 const UpdateProduct = ({match}) => {
 
@@ -21,6 +19,7 @@ const UpdateProduct = ({match}) => {
         shipping: '',
         quantity: '',
         photo: '',
+        images: '',
         loading: false,
         error: '',
         createdProduct: '',
@@ -29,6 +28,7 @@ const UpdateProduct = ({match}) => {
     });
 
     const [description, setDescription] = useState('')
+    const [Images, setImages] = useState([])
 
     const [categories, setCategories] = useState([])
     const {user, token} = isAuthenticated()
@@ -40,6 +40,7 @@ const UpdateProduct = ({match}) => {
         // shipping,
         quantity,
         // photo,
+        images,
         loading,
         error,
         createdProduct,
@@ -61,8 +62,10 @@ const UpdateProduct = ({match}) => {
                     category: data.category._id,
                     shipping: data.shipping,
                     quantity: data.quantity,
+                    images: data.images,
                     formData: new FormData()
                 })
+                setImages(data.images)
                 setDescription(data.description)
                 // load categories
                 initCategories()
@@ -88,7 +91,9 @@ const UpdateProduct = ({match}) => {
     
     useEffect(() => {
         init(match.params.productId);
-    }, [])
+        localStorage.setItem('images', images)
+        // console.log()
+    }, [images])
 
     // two arrow: it is high order function to function is returning anthor function
     const handleChange = name => event => {
@@ -101,6 +106,11 @@ const UpdateProduct = ({match}) => {
     const handleDescription = (e) => {
         setDescription(e)
         formData.set('description', e)
+    }
+
+    const updateImages = (newImages) => {
+        setImages(newImages)
+        formData.set('images', JSON.stringify(newImages))
     }
 
     const clickSubmit = (event) => {
@@ -130,6 +140,8 @@ const UpdateProduct = ({match}) => {
     const newPostForm = () => (
         <form className='mb-3' onSubmit={clickSubmit}>
             <h4>Post Photo</h4>
+            <p>{images}</p>
+            <UpdateUpload refreshFunction={updateImages} imagesFile={images} />
             <div className='form-group'>
                 <label className='btn btn-secondary'>
                     <input

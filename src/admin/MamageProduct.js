@@ -40,7 +40,7 @@ const ManageProducts = () => {
             description='Perform CRUD on products'
             className='container-fluid'
         >
-        <div className='row'>
+        <div className='row overflow-auto'>
             <div className='col-12'>
             <h2 className='text-center'>Total {products.length} products</h2>
             <hr />

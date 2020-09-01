@@ -125,7 +125,7 @@ export const deleteProduct = (productId, userId, token) => {
 //   get a single product
 export const getProduct = (productId) => {
     return fetch(`${API}/product/${productId}`, {
-        method: 'GET'
+        method: 'GET',
     })
         .then(response => {
             return response.json()
@@ -237,4 +237,38 @@ export const updateCoupon = (couponId, userId, token, coupon) => {
             return response.json()
         })
         .catch(err => console.log(err))
+}
+
+export const uploadImage = (formData) => {
+    // console.log( name, email, password)
+    return fetch(`${API}/products/TempImg`, {
+        method: 'POST',
+        headers: {
+            Accept: 'multipart/form-data'
+        },
+        body: formData
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const postImg = (formData) => {
+    // console.log( name, email, password)
+    return fetch(`${API}/products/postImg`, {
+        method: 'POST',
+        headers: {
+            Accept: 'multipart/form-data'
+        },
+        body: formData
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
 }

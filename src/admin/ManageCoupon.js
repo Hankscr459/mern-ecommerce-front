@@ -94,7 +94,7 @@ const ManageCoupon = () => {
             description='Perform CRUD on coupons'
             className='container-fluid'
         >
-        <div className='row'>
+        <div className='row overflow-auto'>
             <div className='col-12'>
             <h2 className='text-center'>Total {coupons.length} Coupons</h2>
             <button 
@@ -112,7 +112,7 @@ const ManageCoupon = () => {
                                     type='checkbox' 
                                     name="select-all" 
                                     id="select-all" 
-                                    onClick={selectAll}
+                                    onChange={selectAll}
                                     checked={!select}
                                 />
                             </th>

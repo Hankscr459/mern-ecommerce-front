@@ -25,7 +25,7 @@ const Card = ({
 
     const shouldRedirect = redirect => {
         if(redirect) {
-            return <Redirect to='cart' />
+            return <Redirect to='/cart' />
         }
     }
 
@@ -86,7 +86,7 @@ const Card = ({
             
             <div className='card-body'>
             {shouldRedirect(redirect)}
-            <Link to={`/product/${product._id}`} className='mr-1 '>
+            <Link to={`/product/${product._id}`} className='mr-1 r_underline'>
                 <ShowImage item={product} url='product' />
                 <div className='name pt-1 pb-1 pl-1'>{product.name.substring(0, 20)}</div>
             </Link>

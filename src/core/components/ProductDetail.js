@@ -5,6 +5,7 @@ import moment from 'moment'
 import { addItem } from './cartHelpers'
 import StarRatings from 'react-star-ratings'
 import renderHTML from 'react-render-html'
+import ProductImage from './ProductImage'
 
 const ProductDetail = ({
     product,
@@ -58,12 +59,7 @@ const ProductDetail = ({
             
             <div className='row'>
                 <div className='col-xl-8 col-lg-8 col-md-8 col-sm-10'>
-                    <img
-                        src={`${API}/product/photo/${product._id}`}
-                        alt={product.name}
-                        className='mb-3'
-                        style={{ maxHeight: 'auto', maxWidth:'250px' }}
-                    />
+                    <ProductImage detail={product} />
                     <p className=''>
                         Category: {product.category && product.category.name}
                     </p>

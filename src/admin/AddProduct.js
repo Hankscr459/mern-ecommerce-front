@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { createProduct, getCategories } from './apiAdmin'
 import { Editor } from '@tinymce/tinymce-react'
 import { initPlugins } from '../helpers/tiny'
+import FileUpload from './components/FileUpload'
 
 const AddProduct = () => {
 
@@ -25,6 +26,7 @@ const AddProduct = () => {
     });
 
     const [description, setDescription] = useState('')
+    const [Images, setImages] = useState([])
 
     const {user, token} = isAuthenticated()
     const {
@@ -75,6 +77,11 @@ const AddProduct = () => {
         formData.set('description', e)
     }
 
+    const updateImages = (newImages) => {
+        setImages(newImages)
+        formData.set('images', JSON.stringify(newImages))
+    }
+
     const clickSubmit = (event) => {
         event.preventDefault();
         setValues({ ...values, error: '', loading: true });
@@ -99,6 +106,7 @@ const AddProduct = () => {
     const newPostForm = () => (
         <form className='mb-3' onSubmit={clickSubmit}>
             <h4>Post Photo</h4>
+            <FileUpload refreshFunction={updateImages} />
             <div className='form-group'>
                 <label className='btn btn-secondary'>
                     <input

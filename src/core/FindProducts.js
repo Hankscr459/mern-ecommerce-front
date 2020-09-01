@@ -25,7 +25,7 @@ const FindProducts = (props) => {
     return (
         <Layout
             title='Search Page'
-            description='find'
+            description='Searcch and find books of your choice'
             className='container-fluid'
         >
             <div className='container'>
@@ -39,10 +39,14 @@ const FindProducts = (props) => {
                         </Link>
                     </li>
                     <li className='nav-item'>
-                        <span className='nav-link pl-0'>/SearchPage</span>
+                        <span className='nav-link pl-0'>/</span>
+                    </li>
+                    <li className='nav-item'>
+                        <span className='nav-link pl-0 ml-2'>Search: {props.location.search.substring(8,999)}</span>
                     </li>
                 </ul>
                 <hr className='mt-2 mb-5' />
+                <h3 className='mb-5'>Result: {products && products.length} Finds</h3>
                 <div className='row'>
                 {products && products.length > 0 && products.map((product, i) => (
                     <div key={i} className='col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-3'>
