@@ -244,7 +244,7 @@ export const updateCoupon = (couponId, userId, token, coupon) => {
 }
 
 export const uploadImage = (formData) => {
-    // console.log( name, email, password)
+
     return fetch(`${API}/products/TempImg`, {
         method: 'POST',
         headers: {
@@ -260,9 +260,26 @@ export const uploadImage = (formData) => {
     })
 }
 
-export const postImg = (formData) => {
-    // console.log( name, email, password)
+export const postImgMulter = (formData) => {
+
     return fetch(`${API}/products/postImg`, {
+        method: 'POST',
+        headers: {
+            Accept: 'multipart/form-data'
+        },
+        body: formData
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const postImg = (formData) => {
+
+    return fetch(`${API}/products/ImgUpload`, {
         method: 'POST',
         headers: {
             Accept: 'multipart/form-data'
