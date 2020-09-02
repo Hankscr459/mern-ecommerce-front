@@ -126,6 +126,10 @@ export const deleteProduct = (productId, userId, token) => {
 export const getProduct = (productId) => {
     return fetch(`${API}/product/${productId}`, {
         method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
     })
         .then(response => {
             return response.json()

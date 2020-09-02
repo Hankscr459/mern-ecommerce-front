@@ -23,10 +23,15 @@ const UpdateUpload = ({refreshFunction}) => {
                 }
             })
     }
+    const loadImg = () => {
+        if(localStorage.getItem('images') && !undefined ) {
+            setImages(JSON.parse(localStorage.getItem('images')))
+       }
+    }
 
     useEffect(() => {
-        setImages(JSON.parse(localStorage.getItem('images')))
-    },[])
+        loadImg()
+    },[localStorage.getItem('images')])
 
 
     const onDelete = (image) => {
@@ -64,15 +69,13 @@ const UpdateUpload = ({refreshFunction}) => {
 
             <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
 
-                {Images.map((image, index) => (
+                {Images != null && Images.map((image, index) => (
                     <div onClick={() => onDelete(image)}>
                         <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`${image}`} alt={`productImg-${index}`} />
                     </div>
                 ))}
 
-
             </div>
-            <p>{imageString}</p>
         </div>
     )
 }

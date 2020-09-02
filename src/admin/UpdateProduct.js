@@ -111,11 +111,12 @@ const UpdateProduct = ({match}) => {
     const updateImages = (newImages) => {
         setImages(newImages)
         formData.set('images', JSON.stringify(newImages))
+        localStorage.setItem('images', JSON.stringify(newImages))
     }
 
     const clickSubmit = (event) => {
         event.preventDefault();
-        
+        localStorage.removeItem('images')
         setValues({ ...values, error: '', loading: true });
         updateProduct(match.params.productId, user._id, token, formData ).then(data => {
             if (data.error) {
@@ -139,9 +140,7 @@ const UpdateProduct = ({match}) => {
 
     const newPostForm = () => (
         <form className='mb-3' onSubmit={clickSubmit}>
-            <h4>Post Photo</h4>
-            <p>{images}</p>
-            <UpdateUpload refreshFunction={updateImages} imagesFile={images} />
+            
             <div className='form-group'>
                 <label className='btn btn-secondary'>
                     <input
@@ -206,10 +205,13 @@ const UpdateProduct = ({match}) => {
                     value={quantity}
                 />
             </div>
-            <label className='text-muted'>Description:</label>
+            <label className='text-muted mt-3'>Images:</label>
+            <UpdateUpload refreshFunction={updateImages} imagesFile={images} />
+            <label className='text-muted mt-3'>Description:</label>
             <Editor
                 apiKey="rbn80pwtv4ifwkn0n77q1s6fq0c9yepoo0dff4zto2gasvsw"
                 initialValue={description} 
+                value={description}
                 init={initPlugins}
                 onEditorChange={handleDescription}
             />
