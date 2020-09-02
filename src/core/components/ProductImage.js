@@ -24,7 +24,7 @@ const ProductImage = (props) => {
             // console.log('Images',Images)
             // console.log('Images',images)
 
-    }, [])
+    }, [props.detail.images])
 
     return (
         <div className='ImageCar'>
