@@ -31,6 +31,7 @@ const UpdateUpload = ({refreshFunction}) => {
 
     useEffect(() => {
         loadImg()
+        setImages([...Images])
     },[localStorage.getItem('images')])
 
 
