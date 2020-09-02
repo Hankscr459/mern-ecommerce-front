@@ -17,6 +17,8 @@ const UpdateUpload = ({refreshFunction}) => {
 
                     setImages([...Images, data.secure_url])
                     refreshFunction([...Images, data.secure_url])
+                    localStorage.setItem('images', JSON.stringify([...Images, data.secure_url]))
+                    loadImg()
 
                 } else {
                     alert('Failed to save the Image in Server')
@@ -27,11 +29,12 @@ const UpdateUpload = ({refreshFunction}) => {
         if(localStorage.getItem('images') && !undefined ) {
             setImages(JSON.parse(localStorage.getItem('images')))
        }
+       
     }
 
     useEffect(() => {
+        
         loadImg()
-        setImages([...Images])
     },[localStorage.getItem('images')])
 
 
@@ -46,17 +49,19 @@ const UpdateUpload = ({refreshFunction}) => {
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className='row container'>
             <Dropzone
                 onDrop={onDrop}
                 multiple={false}
                 maxSize={800000000}
             >
                 {({ getRootProps, getInputProps }) => (
-                    <div style={{
-                        width: '300px', height: '240px', border: '1px solid lightgray',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center'
-                    }}
+                    <div 
+                        style={{
+                            height: '240px', border: '1px solid lightgray',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center'
+                        }}
+                        className='col-xl-4 col-lg-4 col-md-4 col-sm-12'
                         {...getRootProps()}
                     >
                         {console.log('getRootProps', { ...getRootProps() })}
@@ -68,7 +73,10 @@ const UpdateUpload = ({refreshFunction}) => {
                 )}
             </Dropzone>
 
-            <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
+            <div 
+                style={{ display: 'flex', height: '240px', overflowX: 'scroll' }}
+                className='col-xl-8 col-lg-8 col-md-8 col-sm-12'
+            >
 
                 {Images != null && Images.map((image, index) => (
                     <div onClick={() => onDelete(image)}>

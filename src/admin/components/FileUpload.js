@@ -36,7 +36,7 @@ const FileUpload = (props) => {
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className='row container'>
             <Dropzone
                 onDrop={onDrop}
                 multiple={false}
@@ -44,9 +44,10 @@ const FileUpload = (props) => {
             >
                 {({ getRootProps, getInputProps }) => (
                     <div style={{
-                        width: '300px', height: '240px', border: '1px solid lightgray',
+                        height: '240px', border: '1px solid lightgray',
                         display: 'flex', alignItems: 'center', justifyContent: 'center'
                     }}
+                        className='col-xl-4 col-lg-4 col-md-4 col-sm-12'
                         {...getRootProps()}
                     >
                         {console.log('getRootProps', { ...getRootProps() })}
@@ -58,7 +59,10 @@ const FileUpload = (props) => {
                 )}
             </Dropzone>
 
-            <div style={{ display: 'flex', width: '350px', height: '240px', overflowX: 'scroll' }}>
+            <div 
+                style={{ display: 'flex', height: '240px', overflowX: 'scroll' }}
+                className='col-xl-8 col-lg-8 col-md-8 col-sm-12'
+            >
 
                 {Images.map((image, index) => (
                     <div onClick={() => onDelete(image)}>

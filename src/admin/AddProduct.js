@@ -104,9 +104,8 @@ const AddProduct = () => {
     }
 
     const newPostForm = () => (
-        <form className='mb-3' onSubmit={clickSubmit}>
+        <form className='mb-3 container' onSubmit={clickSubmit}>
             <h4>Post Photo</h4>
-            <FileUpload refreshFunction={updateImages} />
             <div className='form-group'>
                 <label className='btn btn-secondary'>
                     <input
@@ -170,7 +169,9 @@ const AddProduct = () => {
                     value={quantity}
                 />
             </div>
-            <label className='text-muted'>Description:</label>
+            <label className='text-muted'>Images:</label>
+            <FileUpload refreshFunction={updateImages} />
+            <label className='text-muted mt-4'>Description:</label>
             <Editor
                 apiKey='rbn80pwtv4ifwkn0n77q1s6fq0c9yepoo0dff4zto2gasvsw'
                 initialValue={description} 
