@@ -21,6 +21,7 @@ import AddCoupon from './admin/AddCoupon'
 import ManageCoupon from './admin/ManageCoupon'
 import UpdateCoupon from './admin/UpdateCoupon'
 import FindProducts from './core/FindProducts'
+import AddCarousel from './admin/AddCarousel'
 
 const Routes = () => {
     return (
@@ -55,6 +56,11 @@ const Routes = () => {
                     path='/create/coupon'
                     exact
                     component={AddCoupon}
+                />
+                <AdminRoute
+                    path='/create/carousel'
+                    exact
+                    component={AddCarousel}
                 />
                 <Route path='/product/:productId' exact component={Product} />
                 <Route path='/cart' exact component={Cart} />

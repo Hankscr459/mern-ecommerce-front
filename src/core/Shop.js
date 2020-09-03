@@ -151,7 +151,7 @@ const Shop = () => {
                                     <option value='priceOrderByasc'>Price ↓</option>
                                     <option value='priceOrderBydesc'>Price ↑</option>
                                     <option value='soldOrderBydesc' >Sold</option>
-                                    <option value='updatedAtOrderByasc'>SortByNew</option>
+                                    <option value='createdAtOrderBydesc'>SortByNew</option>
                                     <option value='quantityOrderByasc'>Quantity ↓</option>
                                 </select>
                             </div>

@@ -21,7 +21,7 @@ export const createCategory = (userId, token, category) => {
 }
 
 export const createProduct = (userId, token, product) => {
-    // console.log( name, email, password)
+    
     return fetch(`${API}/product/create/${userId}`, {
         method: 'POST',
         headers: {
@@ -224,9 +224,7 @@ export const deleMenyCoupon = (userId, token, allId) => {
 }
 
 export const updateCoupon = (couponId, userId, token, coupon) => {
-    // console.log('couponId ', couponId)
-    // console.log('userId ', userId)
-    // console.log('token ', token)
+    
     console.log('coupon ', coupon)
     return fetch(`${API}/coupon/${couponId}/${userId}`, {
         method: 'PUT',
@@ -243,39 +241,39 @@ export const updateCoupon = (couponId, userId, token, coupon) => {
         .catch(err => console.log(err))
 }
 
-export const uploadImage = (formData) => {
+// export const uploadImage = (formData) => {
 
-    return fetch(`${API}/products/TempImg`, {
-        method: 'POST',
-        headers: {
-            Accept: 'multipart/form-data'
-        },
-        body: formData
-    })
-    .then(response => {
-        return response.json()
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+//     return fetch(`${API}/products/TempImg`, {
+//         method: 'POST',
+//         headers: {
+//             Accept: 'multipart/form-data'
+//         },
+//         body: formData
+//     })
+//     .then(response => {
+//         return response.json()
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     })
+// }
 
-export const postImgMulter = (formData) => {
+// export const postImgMulter = (formData) => {
 
-    return fetch(`${API}/products/postImg`, {
-        method: 'POST',
-        headers: {
-            Accept: 'multipart/form-data'
-        },
-        body: formData
-    })
-    .then(response => {
-        return response.json()
-    })
-    .catch(err => {
-        console.log(err)
-    })
-}
+//     return fetch(`${API}/products/postImg`, {
+//         method: 'POST',
+//         headers: {
+//             Accept: 'multipart/form-data'
+//         },
+//         body: formData
+//     })
+//     .then(response => {
+//         return response.json()
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     })
+// }
 
 export const postImg = (formData) => {
 
@@ -285,6 +283,25 @@ export const postImg = (formData) => {
             Accept: 'multipart/form-data'
         },
         body: formData
+    })
+    .then(response => {
+        return response.json()
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
+export const createCarousel = (userId, token, values) => {
+    
+    return fetch(`${API}/carousel/create/${userId}`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(values)
     })
     .then(response => {
         return response.json()
