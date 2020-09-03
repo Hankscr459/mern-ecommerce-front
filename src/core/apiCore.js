@@ -22,12 +22,13 @@ export const getCategories = () => {
 }
 
 export const getFilteredProducts = (skip, limit, filters = {}, sort) => {
+    const query = {sortBy: sort}
     const data = {
         limit,
         skip,
         filters
     }
-    const sortBy = queryString.stringify(sort)
+    const sortBy = queryString.stringify(query)
     console.log('sortBy', sortBy)
     return fetch(`${API}/products/by/search?${sortBy}`, {
         method: 'POST',

@@ -36,8 +36,8 @@ const UpdateProduct = ({match}) => {
         name,
         price,
         // categories,
-        // category,
-        // shipping,
+        category,
+        shipping,
         quantity,
         // photo,
         images,
@@ -175,8 +175,8 @@ const UpdateProduct = ({match}) => {
                 <select
                     onChange={handleChange('category')}
                     className='form-control'
+                    value={category}
                 >
-                    <option value='0'>Please select</option>
                     {categories && 
                         categories.map((c, i) => (
                             <option key={i} value={c._id}>
@@ -190,10 +190,11 @@ const UpdateProduct = ({match}) => {
                 <select
                     onChange={handleChange('shipping')}
                     className='form-control'
+                    value={shipping}
                 >
                 <option value='2'>Please select</option>
-                    <option value='0'>No</option>
-                    <option value='1'>Yes</option>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
                 </select>
             </div>
             <div className='form-group'>

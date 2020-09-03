@@ -48,7 +48,7 @@ const Shop = () => {
     }
 
     const selectChange = (e) => {
-        setSortBy({sortBy: e.target.value})
+        setSortBy(e.target.value)
         if (reload === true) {
             setSkip(0)
             setReload(false)
@@ -87,7 +87,7 @@ const Shop = () => {
     }, [sortBy])
 
     const handleFilters = (filters, filterBy) => {
-        // console.log( 'SHOP',filters, filterBy);
+        
         const newFilters = {...myFilters}
         newFilters.filters[filterBy] = filters
         if (filterBy === 'price') {
@@ -146,12 +146,11 @@ const Shop = () => {
                     <div className='col-sm-12 col-md-9 col-lg-9 col-xl-9'>
                         <h2 className='mb-4'>Products</h2>
                         <div className='row'>
-                            <div className='col-sm-5 col-md-3 col-xl-2 col-lg-3 mt-5 mb-4'>
+                            <div className='col-sm-5 col-md-3 col-xl-3 col-lg-3 mt-5 mb-4'>
                                 <select onChange={e => selectChange(e)} value={sortBy} className='form-control'>
-                                    <option value='_idOrderByasc'>SortBy</option>
                                     <option value='priceOrderByasc'>Price ↓</option>
                                     <option value='priceOrderBydesc'>Price ↑</option>
-                                    <option value='soldOrderBydesc'>Sold</option>
+                                    <option value='soldOrderBydesc' >Sold</option>
                                     <option value='updatedAtOrderByasc'>SortByNew</option>
                                     <option value='quantityOrderByasc'>Quantity ↓</option>
                                 </select>
