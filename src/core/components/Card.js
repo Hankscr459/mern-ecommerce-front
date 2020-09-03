@@ -104,7 +104,7 @@ const Card = ({
                     />
                 </span>
                 <span className='ml-2 mt-2 pt-0'>
-                    ({product.averageRating})
+                    ({product.averageRating.toFixed(1)})
                 </span>
                 
                 <div className='row justify-content-between'>

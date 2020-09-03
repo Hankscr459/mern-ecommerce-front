@@ -101,7 +101,7 @@ export const CreateReview = ({product}) => {
                             </textarea>
                             <button 
                                 onClick={clickSubmit}
-                                className='btn btn-outline-primary mt-4'
+                                className='btn btn-outline-primary mt-4 mb-5'
                             >
                                 Create Review
                             </button>

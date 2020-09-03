@@ -81,7 +81,7 @@ const ProductDetail = ({
                                 starSpacing="0px"
                                 starRatedColor="orange"
                             />
-                                {' '}({product.averageRating})
+                                {' '}({product.averageRating.toFixed(1)})
                         </div>
                         <p>Total{' '}{product.reviews.length} reviews</p>
                         <div>

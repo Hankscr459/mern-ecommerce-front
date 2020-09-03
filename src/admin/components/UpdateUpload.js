@@ -79,7 +79,7 @@ const UpdateUpload = ({refreshFunction}) => {
             >
 
                 {Images != null && Images.map((image, index) => (
-                    <div onClick={() => onDelete(image)}>
+                    <div key={index} onClick={() => onDelete(image)}>
                         <img style={{ minWidth: '300px', width: '300px', height: '240px' }} src={`${image}`} alt={`productImg-${index}`} />
                     </div>
                 ))}
