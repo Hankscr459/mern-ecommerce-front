@@ -11,7 +11,7 @@ const AdminDashboard = () => {
         return (
             <div>
                 <h4 className='card-header'>Admin Links</h4>
-                <ul className='list-group'>
+                <ul className='list-group mb-5'>
                     <li className='list-group-item'>
                         <Link className='nav-link' to='/create/category'>
                             Create Category
@@ -25,6 +25,11 @@ const AdminDashboard = () => {
                     <li className='list-group-item'>
                         <Link className='nav-link' to='/create/coupon'>
                             Create Coupon
+                        </Link>
+                    </li>
+                    <li className='list-group-item'>
+                        <Link className='nav-link' to='/create/carousel'>
+                            Create Carousel
                         </Link>
                     </li>
                     <li className='list-group-item'>

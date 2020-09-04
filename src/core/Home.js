@@ -4,7 +4,7 @@ import { getProducts } from './apiCore'
 import Card from './components/Card'
 import { settings } from '../helpers/SettingSlider'
 import Slider from 'react-slick'
-import Carousel from './components/Carousel'
+import Carousels from './components/Carousels'
 
 const Home = () => {
     const [productsBySell, setProductsBySell] = useState([])
@@ -54,7 +54,7 @@ const Home = () => {
                 </Slider>
                 
                 <hr className='mt-5 mb-5' />
-                <Carousel />
+                <Carousels />
                 <h2 className='mb-4 mt-4'>New Arrivals</h2>
                 <Slider {...settings}>
                     {productsByArrival.map((product, i) => (
@@ -64,6 +64,7 @@ const Home = () => {
                     ))}
                 </Slider>
                 <hr className='mt-5 mb-5' />
+                
             </div>
         </Layout>
     )

@@ -72,32 +72,6 @@ const AddCarousel = () => {
                 />
             </div>
 
-            <Dropzone
-                onDrop={onDrop}
-                multiple={false}
-                maxSize={800000000}
-            >
-                {({ getRootProps, getInputProps }) => (
-                    <div style={{
-                        height: '240px', border: '1px solid lightgray',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center'
-                    }}
-                        className='col-xl-4 col-lg-4 col-md-4 col-sm-12'
-                        {...getRootProps()}
-                    >
-                        {console.log('getRootProps', { ...getRootProps() })}
-                        {console.log('getInputProps', { ...getInputProps() })}
-                        <input {...getInputProps()} />
-                        <i className="fas fa-plus" style={{ fontSize: '3rem' }}></i>
-
-                    </div>
-                )}
-            </Dropzone>
-
-            {photoUrl != null && photoUrl != undefined && (
-                <img src={photoUrl} alt={photoId} />
-            )}
-
             <div className='form-group'>
                 <label className='text-muted'>content</label>
                 <input
@@ -108,8 +82,39 @@ const AddCarousel = () => {
                     required
                 />
             </div>
+            <label className='text-muted'>Photo</label>
+            <div className='row container mb-5'>
+            
+                <Dropzone
+                    onDrop={onDrop}
+                    multiple={false}
+                    maxSize={800000000}
+                >
+                    {({ getRootProps, getInputProps }) => (
+                        <div style={{
+                            height: '240px', border: '1px solid lightgray',
+                            display: 'flex', alignItems: 'center', justifyContent: 'center'
+                        }}
+                            className='col-xl-4 col-lg-4 col-md-4 col-sm-12'
+                            {...getRootProps()}
+                        >
+                            {console.log('getRootProps', { ...getRootProps() })}
+                            {console.log('getInputProps', { ...getInputProps() })}
+                            <input {...getInputProps()} />
+                            <i className="fas fa-plus" style={{ fontSize: '3rem' }}></i>
 
-            <button className='btn btn-outline-primary'>
+                        </div>
+                    )}
+                </Dropzone>
+
+                {photoUrl != null && photoUrl != undefined && (
+                    <div className='col-xl-4 col-lg-4 col-md-4 col-sm-12 overflow-hidden'>
+                        <img style={{'maxWidth': '500px'}} src={photoUrl} alt={photoId} />
+                    </div>
+                )}
+            </div>
+
+            <button className='btn btn-outline-primary mb-5'>
                 Create Carousel
             </button>
         </form>

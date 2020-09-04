@@ -144,3 +144,7 @@ body {
     width: 100%;
     height: 30vh;
 }
+
+.bg_Carousel_black {
+  background-color: rgb(29, 21, 21, 0.8)
+}

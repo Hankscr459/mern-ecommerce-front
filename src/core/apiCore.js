@@ -168,3 +168,13 @@ export const search = (params) => {
     })
     .catch(err => console.log(err))
 }
+
+export const getCarousels = () => {
+    return fetch(`${API}/carousel`, {
+        method: 'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
