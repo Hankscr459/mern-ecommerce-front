@@ -22,6 +22,8 @@ import ManageCoupon from './admin/ManageCoupon'
 import UpdateCoupon from './admin/UpdateCoupon'
 import FindProducts from './core/FindProducts'
 import AddCarousel from './admin/AddCarousel'
+import ManageCarousel from './admin/ManageCarousel'
+import UpdateCarousel from './admin/UpdateCarousel'
 
 const Routes = () => {
     return (
@@ -86,6 +88,11 @@ const Routes = () => {
                     component={ManageCoupon}
                 />
                 <AdminRoute
+                    path='/admin/carousels'
+                    exact
+                    component={ManageCarousel}
+                />
+                <AdminRoute
                     path='/admin/product/update/:productId'
                     exact
                     component={UpdateProduct}
@@ -94,6 +101,11 @@ const Routes = () => {
                     path='/admin/coupon/update/:couponId'
                     exact
                     component={UpdateCoupon}
+                />
+                <AdminRoute
+                    path='/admin/carousel/update/:carouselId'
+                    exact
+                    component={UpdateCarousel}
                 />
             </Switch>
         </BrowserRouter>

@@ -11,7 +11,8 @@ const AddCarousel = () => {
         name: '',
         content: '',
         photoUrl: '',
-        photoId: ''
+        photoId: '',
+        link: ''
     })
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
@@ -73,7 +74,18 @@ const AddCarousel = () => {
             </div>
 
             <div className='form-group'>
-                <label className='text-muted'>content</label>
+                <label className='text-muted'>Link</label>
+                <input
+                    type='text'
+                    className='form-control'
+                    onChange={handleChange('link')}
+                    value={content}
+                    required
+                />
+            </div>
+
+            <div className='form-group'>
+                <label className='text-muted'>Content</label>
                 <input
                     type='text'
                     className='form-control'

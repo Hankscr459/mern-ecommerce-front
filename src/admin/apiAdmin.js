@@ -310,3 +310,56 @@ export const createCarousel = (userId, token, values) => {
         console.log(err)
     })
 }
+
+export const getCarousels = () => {
+    return fetch(`${API}/carousel`, {
+        method: 'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
+
+export const deleteCarousel = (carouselId, userId, token) => {
+    return fetch(`${API}/carousel/remove/${carouselId}/${userId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        }
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
+
+export const getCarousel = (carouselId) => {
+    return fetch(`${API}/carousel/${carouselId}`, {
+        method: 'GET'
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}
+
+export const updateCarousel = (carouselId, userId, token, carousel) => {
+    
+    console.log('carousel ', carousel)
+    return fetch(`${API}/carousel/update/${carouselId}/${userId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(carousel)
+    })
+        .then(response => {
+            return response.json()
+        })
+        .catch(err => console.log(err))
+}

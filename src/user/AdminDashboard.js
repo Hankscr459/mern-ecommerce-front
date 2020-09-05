@@ -47,6 +47,11 @@ const AdminDashboard = () => {
                             Manage Coupons
                         </Link>
                     </li>
+                    <li className='list-group-item'>
+                        <Link className='nav-link' to='/admin/carousels'>
+                            Manage Carousels
+                        </Link>
+                    </li>
                     
                 </ul>
             </div>
