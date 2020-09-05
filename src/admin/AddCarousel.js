@@ -17,7 +17,7 @@ const AddCarousel = () => {
     const [error, setError] = useState(false)
     const [success, setSuccess] = useState(false)
 
-    const { name, content, photoUrl, photoId } = values
+    const { name, content, photoUrl, link, photoId } = values
     const { user, token } = isAuthenticated()
 
     const onDrop = (files) => {
