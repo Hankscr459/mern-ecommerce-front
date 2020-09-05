@@ -79,7 +79,7 @@ const AddCarousel = () => {
                     type='text'
                     className='form-control'
                     onChange={handleChange('link')}
-                    value={content}
+                    value={link}
                     required
                 />
             </div>
